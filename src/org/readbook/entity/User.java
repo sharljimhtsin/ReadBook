@@ -12,6 +12,7 @@ public class User {
 	private String name;
 	private String alias;
 	private int age;
+	private int sex;
 	private String email;
 	private int isEmailBind;
 	private String phone;
@@ -295,5 +296,20 @@ public class User {
 	 */
 	public void setRole(int role) {
 		this.role = role;
+	}
+
+	/**
+	 * @return the sex
+	 */
+	public int getSex() {
+		return sex;
+	}
+
+	/**
+	 * @param sex
+	 *            the sex to set
+	 */
+	public void setSex(int sex) {
+		this.sex = sex;
 	}
 }
