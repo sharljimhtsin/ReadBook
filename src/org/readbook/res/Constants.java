@@ -68,6 +68,7 @@ public class Constants {
 		public final static String shareUrl = "shareUrl";
 		
 		public final static String locationProvince = "locationProvince"; 
-		public final static String locationCity = "locationCity"; 
+		public final static String locationCity = "locationCity";
+		public final static String locationArea = "locationArea"; 
 	}
 }

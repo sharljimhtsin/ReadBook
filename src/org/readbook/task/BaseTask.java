@@ -44,6 +44,7 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 		String device_brand = application.getDeviceBrand();
 		String province = application.getLocationProvince();
 		String city = application.getLocationCity();
+		String area = application.getLocationArea();
 		String appversion = application.getVersion();
 		String deviceID = application.getDeviceID();
 		// extend fields
@@ -64,6 +65,7 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 		map.put("device_brand", device_brand);
 		map.put("province", province);
 		map.put("city", city);
+		map.put("area", area);
 		map.put("appversion", appversion);
 		map.put("deviceID", deviceID);
 		map.put("phoneNumber", phoneNumber);

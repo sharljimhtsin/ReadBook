@@ -41,6 +41,7 @@ public class MyApplication extends Application {
 	public MyLocationListener mMyLocationListener;
 	private String locationProvince = "";
 	private String locationCity = "";
+	private String locationArea = "";
 
 	@Override
 	public void onCreate() {
@@ -139,6 +140,12 @@ public class MyApplication extends Application {
 		}
 		return locationCity;
 	}
+	public String getLocationArea(){
+		if(TextUtils.isEmpty(locationArea)){
+			return sharedPreferences.getString(Constants.ShareRefrence.locationArea, "");
+		}
+		return locationArea;
+	}
 	
 	/**
 	 * 退出App
@@ -235,7 +242,6 @@ public class MyApplication extends Application {
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
 		}
-
 		return version;
 	}
 
@@ -253,7 +259,6 @@ public class MyApplication extends Application {
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
 		}
-
 		return code;
 	}
 
@@ -352,10 +357,15 @@ public class MyApplication extends Application {
 //			}
 			locationProvince = location.getProvince();
 			locationCity = location.getCity();
+			locationArea = location.getDistrict();
 			if(!TextUtils.isEmpty(locationProvince)){
 				Editor editor = sharedPreferences.edit();
-				editor.putString(Constants.ShareRefrence.locationProvince, locationProvince);
-				editor.putString(Constants.ShareRefrence.locationCity, locationCity);
+				editor.putString(Constants.ShareRefrence.locationProvince,
+						locationProvince);
+				editor.putString(Constants.ShareRefrence.locationCity,
+						locationCity);
+				editor.putString(Constants.ShareRefrence.locationArea,
+						locationArea);
 				editor.commit();
 			}
 //			locationCity = "上海";
