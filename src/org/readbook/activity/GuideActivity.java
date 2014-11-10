@@ -3,8 +3,6 @@ package org.readbook.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.readbook.R;
-
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
