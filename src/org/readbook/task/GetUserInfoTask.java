@@ -37,14 +37,12 @@ public class GetUserInfoTask extends BaseTask {
 			    Gson gson = new Gson();
 			    User user = gson.fromJson(jsonObject.toString(), User.class);
 			    // save common property
-			    Editor editor = MyApplication.getInstance().getSharedPreferences().edit();
-			    editor.putString(Constants.ShareRefrence.name, user.getName());
-			    editor.putInt(Constants.ShareRefrence.age,user.getAge());
-			    editor.putInt(Constants.ShareRefrence.sex, user.getSex());
-			    editor.putString(Constants.ShareRefrence.email, user.getEmail());
-			    editor.putString(Constants.ShareRefrence.phoneNumber, user.getPhone());
-			    editor.putString(Constants.ShareRefrence.qq, user.getQq());
-			    editor.commit();
+			    MyApplication.getInstance().setIsEmailBind(user.getIsEmailBind());
+			    MyApplication.getInstance().setIsPhoneBind(user.getIsPhoneBind());
+			    MyApplication.getInstance().setName(user.getName());
+			    MyApplication.getInstance().setEmail(user.getEmail());
+			    MyApplication.getInstance().setPhoneNumber(user.getPhone());
+			    MyApplication.getInstance().setQQ(user.getQq());
 			    if(handler != null){
 			    	Message msg = handler.obtainMessage();
 			    	msg.obj = user;

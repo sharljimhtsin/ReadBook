@@ -1,27 +1,34 @@
 package org.readbook.entity;
 
+import org.readbook.clz.MyApplication;
+
+import android.text.TextUtils;
+
 /**
  * @author Administrator
  *
  */
 public class BaseRequest {
-	/* 初始化全局传递参数 */
+	private String deviceID = "";
+	// user auth parameters
 	private String phoneNumber = ""; // 手机号码
 	private String qq = ""; // QQ号码
 	private String name = ""; // 用户真实姓名
+	private String email = ""; // 用户email
+	// user info parameters
 	private String sex = "1"; // 性别|0:女|1:男
 	private String age = ""; // 用户年龄段
-	private String email = ""; // 用户email
-	// extend parameters
-	private String docTypeId = "";
-	private String docCategoryId = "";
-	private String articleId = "";
+	// article parameters
+	private String docTypeId = ""; // 段子类别
+	private String docCategoryId = ""; // 段子类型
+	private String articleId = ""; // 段子id
 
 	/**
 	 * @return the phoneNumber
 	 */
 	public String getPhoneNumber() {
-		return phoneNumber;
+		return TextUtils.isEmpty(phoneNumber) ? MyApplication.getInstance()
+				.getDeviceID() : phoneNumber;
 	}
 
 	/**
@@ -36,7 +43,8 @@ public class BaseRequest {
 	 * @return the qq
 	 */
 	public String getQq() {
-		return qq;
+		return TextUtils.isEmpty(qq) ? MyApplication.getInstance()
+				.getDeviceID() : qq;
 	}
 
 	/**
@@ -51,7 +59,8 @@ public class BaseRequest {
 	 * @return the name
 	 */
 	public String getName() {
-		return name;
+		return TextUtils.isEmpty(name) ? MyApplication.getInstance()
+				.getDeviceID() : name;
 	}
 
 	/**
@@ -96,7 +105,8 @@ public class BaseRequest {
 	 * @return the email
 	 */
 	public String getEmail() {
-		return email;
+		return TextUtils.isEmpty(email) ? MyApplication.getInstance()
+				.getDeviceID() : email;
 	}
 
 	/**
@@ -150,5 +160,21 @@ public class BaseRequest {
 	 */
 	public void setArticleId(String articleId) {
 		this.articleId = articleId;
+	}
+
+	/**
+	 * @return the deviceID
+	 */
+	public String getDeviceID() {
+		return TextUtils.isEmpty(deviceID) ? MyApplication.getInstance()
+				.getDeviceID() : deviceID;
+	}
+
+	/**
+	 * @param deviceID
+	 *            the deviceID to set
+	 */
+	public void setDeviceID(String deviceID) {
+		this.deviceID = deviceID;
 	}
 }

@@ -55,13 +55,11 @@ public class Constants {
 	public static final class ShareRefrence {
 		public final static String SHAREREFRENCE_NAME = "readbook";
 		public final static String deviceID = "deviceID";//设备ID
-		public final static String bindStatus = "bindStatus";//该设备绑定状态 1未绑定  0已绑定
-		////////////////////////////////////////////////
+		public final static String isEmailBind = "isEmailBind";//该设备绑定状态 1未绑定  0已绑定
+		public final static String isPhoneBind = "isPhoneBind";//该设备绑定状态 1未绑定  0已绑定
 		public final static String phoneNumber = "phoneNumber";//绑定的手机号码
 		public final static String qq = "qq"; // QQ号码
 		public final static String name = "name"; // 姓名
-		public final static String sex = "sex"; // 性别|0:女|1:男
-		public final static String age = "age"; // 用户年龄段
 		public final static String email = "email"; // 用户email
 		///
 		public final static String shareText = "shareText";

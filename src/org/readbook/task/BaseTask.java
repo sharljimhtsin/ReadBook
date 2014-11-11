@@ -46,14 +46,15 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 		String city = application.getLocationCity();
 		String area = application.getLocationArea();
 		String appversion = application.getVersion();
-		String deviceID = application.getDeviceID();
 		// extend fields
+		String deviceID = request.getDeviceID();
 		String phoneNumber = request.getPhoneNumber();
 		String qq = request.getQq();
 		String name = request.getName();
+		String email = request.getEmail();
+		// logic fields
 		String sex = request.getSex();
 		String age = request.getAge();
-		String email = request.getEmail();
 		String docTypeId = request.getDocTypeId();
 		String docCategoryId = request.getDocCategoryId();
 		String articleId = request.getArticleId();

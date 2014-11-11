@@ -47,106 +47,145 @@ public class MyApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 		instance = this;
-		sharedPreferences = getSharedPreferences(Constants.ShareRefrence.SHAREREFRENCE_NAME, Context.MODE_PRIVATE);
+		sharedPreferences = getSharedPreferences(
+				Constants.ShareRefrence.SHAREREFRENCE_NAME,
+				Context.MODE_PRIVATE);
 		SdcardManager.prepare();
 		initImageLoader(this);
-		
-		JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
-        JPushInterface.init(this);     		// 初始化 JPush
-        
+
+		JPushInterface.setDebugMode(true); // 设置开启日志,发布时请关闭日志
+		JPushInterface.init(this); // 初始化 JPush
+
 		mLocationClient = new LocationClient(this.getApplicationContext());
 		mMyLocationListener = new MyLocationListener();
 		mLocationClient.registerLocationListener(mMyLocationListener);
 		InitLocation();
 	}
-	
+
 	public static MyApplication getInstance() {
 		return instance;
 	}
-	
+
 	/**
 	 * 服务器返回给客户端的唯一ID
+	 * 
 	 * @return
 	 */
-	public String getDeviceID(){
-		return sharedPreferences.getString(Constants.ShareRefrence.deviceID, "");
+	public String getDeviceID() {
+		return sharedPreferences
+				.getString(Constants.ShareRefrence.deviceID, "");
 	}
-	
+
+	public void setDeviceID(String s) {
+		sharedPreferences.edit().putString(Constants.ShareRefrence.deviceID, s);
+		sharedPreferences.edit().commit();
+	}
+
 	/**
 	 * 服务器返回给客户端的手机号码
+	 * 
 	 * @return
 	 */
-	public String getPhoneNumber(){
-		return sharedPreferences.getString(Constants.ShareRefrence.phoneNumber, "");
+	public String getPhoneNumber() {
+		return sharedPreferences.getString(Constants.ShareRefrence.phoneNumber,
+				"");
 	}
-	
+
+	public void setPhoneNumber(String s) {
+		sharedPreferences.edit().putString(Constants.ShareRefrence.phoneNumber,
+				s);
+		sharedPreferences.edit().commit();
+	}
+
 	/**
-	 * 该设备绑定状态 1未绑定  0已绑定
+	 * 该设备绑定状态 1未绑定 0已绑定
+	 * 
 	 * @return
 	 */
-	public int getBindStatus(){
-		return sharedPreferences.getInt(Constants.ShareRefrence.bindStatus, 1);
+	public int getIsPhoneBind() {
+		return sharedPreferences.getInt(Constants.ShareRefrence.isPhoneBind, 1);
 	}
-	
+
+	public void setIsPhoneBind(int s) {
+		sharedPreferences.edit().putInt(Constants.ShareRefrence.isPhoneBind, s);
+		sharedPreferences.edit().commit();
+	}
+
+	public int getIsEmailBind() {
+		return sharedPreferences.getInt(Constants.ShareRefrence.isEmailBind, 1);
+	}
+
+	public void setIsEmailBind(int s) {
+		sharedPreferences.edit().putInt(Constants.ShareRefrence.isEmailBind, s);
+		sharedPreferences.edit().commit();
+	}
+
 	/**
 	 * QQ号码
+	 * 
 	 * @return
 	 */
-	public String getQQ(){
+	public String getQQ() {
 		return sharedPreferences.getString(Constants.ShareRefrence.qq, "");
 	}
-	
+
+	public void setQQ(String s) {
+		sharedPreferences.edit().putString(Constants.ShareRefrence.qq, s);
+		sharedPreferences.edit().commit();
+	}
+
 	/**
 	 * 性别|0:女|1:男
+	 * 
 	 * @return
 	 */
-	public String getName(){
+	public String getName() {
 		return sharedPreferences.getString(Constants.ShareRefrence.name, "");
 	}
-	
-	/**
-	 * 性别|0:女|1:男
-	 * @return
-	 */
-	public int getSex(){
-		return sharedPreferences.getInt(Constants.ShareRefrence.sex, 1);
+
+	public void setName(String s) {
+		sharedPreferences.edit().putString(Constants.ShareRefrence.name, s);
+		sharedPreferences.edit().commit();
 	}
-	
-	/**
-	 * 性别|0:女|1:男
-	 * @return
-	 */
-	public String getAge(){
-		return sharedPreferences.getString(Constants.ShareRefrence.age, "");
-	}
-	
+
 	/**
 	 * 用户email
+	 * 
 	 * @return
 	 */
-	public String getEmail(){
+	public String getEmail() {
 		return sharedPreferences.getString(Constants.ShareRefrence.email, "");
 	}
-	
-	public String getLocationProvince(){
-		if(TextUtils.isEmpty(locationProvince)){
-			return sharedPreferences.getString(Constants.ShareRefrence.locationProvince, "");
+
+	public void setEmail(String s) {
+		sharedPreferences.edit().putString(Constants.ShareRefrence.email, s);
+		sharedPreferences.edit().commit();
+	}
+
+	public String getLocationProvince() {
+		if (TextUtils.isEmpty(locationProvince)) {
+			return sharedPreferences.getString(
+					Constants.ShareRefrence.locationProvince, "");
 		}
 		return locationProvince;
 	}
-	public String getLocationCity(){
-		if(TextUtils.isEmpty(locationCity)){
-			return sharedPreferences.getString(Constants.ShareRefrence.locationCity, "");
+
+	public String getLocationCity() {
+		if (TextUtils.isEmpty(locationCity)) {
+			return sharedPreferences.getString(
+					Constants.ShareRefrence.locationCity, "");
 		}
 		return locationCity;
 	}
-	public String getLocationArea(){
-		if(TextUtils.isEmpty(locationArea)){
-			return sharedPreferences.getString(Constants.ShareRefrence.locationArea, "");
+
+	public String getLocationArea() {
+		if (TextUtils.isEmpty(locationArea)) {
+			return sharedPreferences.getString(
+					Constants.ShareRefrence.locationArea, "");
 		}
 		return locationArea;
 	}
-	
+
 	/**
 	 * 退出App
 	 */
@@ -166,16 +205,17 @@ public class MyApplication extends Application {
 
 	public static void initImageLoader(Context context) {
 		File cacheDir = StorageUtils.getCacheDirectory(context);
-//		File cacheDir = SdcardManager.getImageCacheFile();
+		// File cacheDir = SdcardManager.getImageCacheFile();
 		// This configuration tuning is custom. You can tune every option, you
 		// may tune some of them,
 		// or you can create default configuration by
 		// ImageLoaderConfiguration.createDefault(this);
 		// method.
 		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
-				context).threadPriority(Thread.NORM_PRIORITY - 2)
+				context)
+				.threadPriority(Thread.NORM_PRIORITY - 2)
 				.denyCacheImageMultipleSizesInMemory()
-//				.discCacheFileNameGenerator(new Md5FileNameGenerator())
+				// .discCacheFileNameGenerator(new Md5FileNameGenerator())
 				.discCacheFileNameGenerator(new HashCodeFileNameGenerator())
 				.tasksProcessingOrder(QueueProcessingType.LIFO)
 				.writeDebugLogs() // Remove for release app
@@ -183,7 +223,6 @@ public class MyApplication extends Application {
 		// Initialize ImageLoader with configuration.
 		ImageLoader.getInstance().init(config);
 	}
-
 
 	/**
 	 * User-Agent
@@ -311,11 +350,10 @@ public class MyApplication extends Application {
 		}
 		return false;
 	}
-	
-	public static boolean isEmulator(){
+
+	public static boolean isEmulator() {
 		return "sdk".equals(Build.PRODUCT);
 	}
-	
 
 	/**
 	 * 实现实位回调监听
@@ -324,41 +362,13 @@ public class MyApplication extends Application {
 
 		@Override
 		public void onReceiveLocation(BDLocation location) {
-			if(location == null){
+			if (location == null) {
 				return;
 			}
-			//Receive Location 
-//			StringBuffer sb = new StringBuffer(256);
-//			sb.append("time : ");
-//			sb.append(location.getTime());
-//			sb.append("\nerror code : ");
-//			sb.append(location.getLocType());
-//			sb.append("\nlatitude : ");
-//			sb.append(location.getLatitude());
-//			sb.append("\nlontitude : ");
-//			sb.append(location.getLongitude());
-//			sb.append("\nradius : ");
-//			sb.append(location.getRadius());
-//			if (location.getLocType() == BDLocation.TypeGpsLocation){
-//				sb.append("\nspeed : ");
-//				sb.append(location.getSpeed());
-//				sb.append("\nsatellite : ");
-//				sb.append(location.getSatelliteNumber());
-//				sb.append("\ndirection : ");
-//				sb.append("\naddr : ");
-//				sb.append(location.getAddrStr());
-//				sb.append(location.getDirection());
-//			} else if (location.getLocType() == BDLocation.TypeNetWorkLocation){
-//				sb.append("\naddr : ");
-//				sb.append(location.getAddrStr());
-//				//运营商信息
-//				sb.append("\noperationers : ");
-//				sb.append(location.getOperators());
-//			}
 			locationProvince = location.getProvince();
 			locationCity = location.getCity();
 			locationArea = location.getDistrict();
-			if(!TextUtils.isEmpty(locationProvince)){
+			if (!TextUtils.isEmpty(locationProvince)) {
 				Editor editor = sharedPreferences.edit();
 				editor.putString(Constants.ShareRefrence.locationProvince,
 						locationProvince);
@@ -368,15 +378,14 @@ public class MyApplication extends Application {
 						locationArea);
 				editor.commit();
 			}
-//			locationCity = "上海";
 		}
 	}
-	
-	private void InitLocation(){
+
+	private void InitLocation() {
 		LocationClientOption option = new LocationClientOption();
-		option.setLocationMode(LocationMode.Battery_Saving);//设置定位模式
-		option.setCoorType("bd09ll");//返回的定位结果是百度经纬度，默认值gcj02
-		option.setScanSpan(100000);//设置发起定位请求的间隔时间为5000ms
+		option.setLocationMode(LocationMode.Battery_Saving);// 设置定位模式
+		option.setCoorType("bd09ll");// 返回的定位结果是百度经纬度，默认值gcj02
+		option.setScanSpan(100000);// 设置发起定位请求的间隔时间为5000ms
 		option.setIsNeedAddress(true);
 		mLocationClient.setLocOption(option);
 	}
