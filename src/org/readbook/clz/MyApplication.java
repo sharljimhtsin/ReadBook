@@ -21,6 +21,8 @@ import android.text.TextUtils;
 import android.widget.Toast;
 import cn.jpush.android.api.JPushInterface;
 
+import com.avos.avoscloud.AVCloud;
+import com.avos.avoscloud.AVOSCloud;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -55,6 +57,9 @@ public class MyApplication extends Application {
 
 		JPushInterface.setDebugMode(true); // 设置开启日志,发布时请关闭日志
 		JPushInterface.init(this); // 初始化 JPush
+
+		// initial leanCloud
+		AVOSCloud.initialize(this, "", "");
 
 		mLocationClient = new LocationClient(this.getApplicationContext());
 		mMyLocationListener = new MyLocationListener();

@@ -72,9 +72,9 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 		map.put("phoneNumber", phoneNumber);
 		map.put("qq", qq);
 		map.put("name", name);
+		map.put("email", email);
 		map.put("sex", sex);
 		map.put("age", age);
-		map.put("email", email);
 		map.put("docTypeId", docTypeId);
 		map.put("docCategoryId", docCategoryId);
 		map.put("articleId", articleId);

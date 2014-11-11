@@ -3,9 +3,8 @@ package org.readbook.task;
 import java.util.List;
 
 import org.json.JSONObject;
+import org.readbook.entity.Article;
 import org.readbook.entity.BaseRequest;
-import org.readbook.entity.DocCategory;
-import org.readbook.entity.DocType;
 import org.readbook.res.Constants;
 import org.readbook.utils.LogUtil;
 
@@ -13,8 +12,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
-import com.avos.avoscloud.AVObject;
-import com.avos.avoscloud.AVQuery;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -28,21 +25,15 @@ import com.google.gson.reflect.TypeToken;
 3. 返回分享文本和app下载地址
 4. 返回顶部信息
  */
-public class ArticleCategoryListTask extends BaseTask {
+public class ArticleListTask extends BaseTask {
 
-	public ArticleCategoryListTask(BaseRequest request, Handler handler) {
+	public ArticleListTask(BaseRequest request, Handler handler) {
 		super(request, handler);
 	}
 
 	@Override
 	protected Void doInBackground(Void... params) {
 		try {
-			AVQuery<AVObject> query = new AVQuery<AVObject>(DocCategory.class.getSimpleName());
-			query.setSkip(0);
-			query.setLimit(20);
-			List<AVObject> result = query.find();
-			DocCategory a = result.get(0).getAVObject("ss", DocCategory.class);
-			
 			setRequestParams();
 			String resultJson = httpHelper.httpPost(Constants.Host.getAvailable, map);
 			LogUtil.logD(LogUtil.TAG, "------TaskListAvailableTask receiver-------" + resultJson);
@@ -52,14 +43,15 @@ public class ArticleCategoryListTask extends BaseTask {
 				String data = jsonObject.getString("data");
 				if(data.length() > 5){
 					Gson gson = new Gson();
-					DocCategory response = gson.fromJson(jsonObject.toString(),
-							new TypeToken<List<DocCategory>>() {
+					List<Article> response = gson.fromJson(
+							jsonObject.toString(),
+							new TypeToken<List<Article>>() {
 							}.getType());
 					Message msg = new Message();
 					msg.what = 0;
 					Bundle bundle = new Bundle();
-					bundle.putString("topmsg", response.getTitle());
-					msg.obj = response.getDescription();
+					bundle.putString("topmsg", response.get(0).getDescription());
+					msg.obj = response.get(1);
 					msg.setData(bundle);
 					handler.sendMessage(msg);
 				}else{

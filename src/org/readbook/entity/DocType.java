@@ -3,11 +3,13 @@
  */
 package org.readbook.entity;
 
+import com.avos.avoscloud.AVObject;
+
 /**
  * @author Administrator
  *
  */
-public class DocType {
+public class DocType extends AVObject {
 	private int id;
 	private String title;
 	private String description;

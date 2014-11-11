@@ -7,7 +7,6 @@ import org.readbook.entity.User;
 import org.readbook.res.Constants;
 import org.readbook.utils.LogUtil;
 
-import android.content.SharedPreferences.Editor;
 import android.os.Handler;
 import android.os.Message;
 
