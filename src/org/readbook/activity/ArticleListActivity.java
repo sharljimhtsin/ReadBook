@@ -27,10 +27,13 @@ public class ArticleListActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		String typeId = getIntent().getStringExtra("typeId");
 		init();
 		BaseRequest request = new BaseRequest();
+		request.setDocTypeId(typeId);
 		ArticleListTask task = new ArticleListTask(request, mHandler);
 		task.execute();
+		startLoading();
 	}
 
 	private void init() {

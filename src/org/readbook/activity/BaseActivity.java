@@ -8,6 +8,7 @@ import org.readbook.utils.ActivityStackManager;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -33,10 +34,12 @@ public class BaseActivity extends Activity {
 	private TimerTask timeTask = null;
 	private boolean isExit = false; // 标记是否要退出
 	private ProgressDialog progressDialog;
+	public Context mContext;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		mContext = this;
 //		getWindow().setBackgroundDrawable(null);
 //		getWindow().setFormat(PixelFormat.RGBA_8888);
 		//设置全屏  

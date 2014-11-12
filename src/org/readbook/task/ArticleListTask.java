@@ -36,6 +36,9 @@ public class ArticleListTask extends BaseTask {
 			q.setSkip((super.request.getPage() - 1)
 					* super.request.getPageSize());
 			q.setLimit(super.request.getPageSize());
+			q.whereEqualTo("parentType", super.request.getDocTypeId());
+			// q.whereEqualTo("parentCategory",
+			// super.request.getDocCategoryId());
 			List<Article> result = q.find();
 			if (result != null) {
 				if (result.size() > 0) {
