@@ -10,6 +10,9 @@ import android.text.TextUtils;
  */
 public class BaseRequest {
 	private String deviceID = "";
+	// common parameters
+	private int page = 1;
+	private int pageSize = 20;
 	// user auth parameters
 	private String phoneNumber = ""; // 手机号码
 	private String qq = ""; // QQ号码
@@ -176,5 +179,35 @@ public class BaseRequest {
 	 */
 	public void setDeviceID(String deviceID) {
 		this.deviceID = deviceID;
+	}
+
+	/**
+	 * @return the page
+	 */
+	public int getPage() {
+		return page;
+	}
+
+	/**
+	 * @param page
+	 *            the page to set
+	 */
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+	/**
+	 * @return the pageSize
+	 */
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	/**
+	 * @param pageSize
+	 *            the pageSize to set
+	 */
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
 	}
 }

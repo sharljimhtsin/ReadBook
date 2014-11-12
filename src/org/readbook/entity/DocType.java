@@ -3,12 +3,14 @@
  */
 package org.readbook.entity;
 
+import com.avos.avoscloud.AVClassName;
 import com.avos.avoscloud.AVObject;
 
 /**
  * @author Administrator
  *
  */
+@AVClassName("DocType")
 public class DocType extends AVObject {
 	private int id;
 	private String title;

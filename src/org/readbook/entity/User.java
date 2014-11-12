@@ -3,11 +3,15 @@
  */
 package org.readbook.entity;
 
+import com.avos.avoscloud.AVClassName;
+import com.avos.avoscloud.AVObject;
+
 /**
  * @author Administrator
  *
  */
-public class User {
+@AVClassName("User")
+public class User extends AVObject {
 	private int id;
 	private String name;
 	private String alias;

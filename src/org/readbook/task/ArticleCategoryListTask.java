@@ -2,21 +2,16 @@ package org.readbook.task;
 
 import java.util.List;
 
-import org.json.JSONObject;
 import org.readbook.entity.BaseRequest;
 import org.readbook.entity.DocCategory;
-import org.readbook.entity.DocType;
 import org.readbook.res.Constants;
 import org.readbook.utils.LogUtil;
 
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 /**
  * #获取可做任务列表 Task/getAvailable
@@ -37,40 +32,30 @@ public class ArticleCategoryListTask extends BaseTask {
 	@Override
 	protected Void doInBackground(Void... params) {
 		try {
-			AVQuery<AVObject> query = new AVQuery<AVObject>(DocCategory.class.getSimpleName());
-			query.setSkip(0);
-			query.setLimit(20);
-			List<AVObject> result = query.find();
-			DocCategory a = result.get(0).getAVObject("ss", DocCategory.class);
-			
-			setRequestParams();
-			String resultJson = httpHelper.httpPost(Constants.Host.getAvailable, map);
-			LogUtil.logD(LogUtil.TAG, "------TaskListAvailableTask receiver-------" + resultJson);
-			JSONObject dataObject = new JSONObject(resultJson);
-			if (dataObject.getInt("status") == 0) {
-				JSONObject jsonObject = dataObject.getJSONObject("data");
-				String data = jsonObject.getString("data");
-				if(data.length() > 5){
-					Gson gson = new Gson();
-					DocCategory response = gson.fromJson(jsonObject.toString(),
-							new TypeToken<List<DocCategory>>() {
-							}.getType());
+			AVQuery<DocCategory> q = AVObject.getQuery(DocCategory.class);
+			q.setSkip((super.request.getPage() - 1)
+					* super.request.getPageSize());
+			q.setLimit(super.request.getPageSize());
+			List<DocCategory> result = q.find();
+			if (result != null) {
+				if (result.size() > 0) {
 					Message msg = new Message();
 					msg.what = 0;
-					Bundle bundle = new Bundle();
-					bundle.putString("topmsg", response.getTitle());
-					msg.obj = response.getDescription();
-					msg.setData(bundle);
+					msg.obj = result;
 					handler.sendMessage(msg);
-				}else{
+				} else {
 					Message msg = handler.obtainMessage();
-					msg.obj = dataObject.getString("info");
+					msg.obj = "empty set";
 					msg.what = -1;
 					handler.sendMessage(msg);
 				}
+				LogUtil.logD(
+						LogUtil.TAG,
+						"------TaskListAvailableTask receiver-------"
+								+ result.size());
 			} else {
 				Message msg = handler.obtainMessage();
-				msg.obj = dataObject.getString("info");
+				msg.obj = "set null";
 				msg.what = -1;
 				handler.sendMessage(msg);
 			}

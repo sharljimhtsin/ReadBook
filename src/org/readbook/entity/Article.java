@@ -5,11 +5,15 @@ package org.readbook.entity;
 
 import java.util.ArrayList;
 
+import com.avos.avoscloud.AVClassName;
+import com.avos.avoscloud.AVObject;
+
 /**
  * @author Administrator
  *
  */
-public class Article {
+@AVClassName("Article")
+public class Article extends AVObject {
 	private int id;
 	private String title;
 	private String description;
@@ -31,7 +35,7 @@ public class Article {
 	 * @return the id
 	 */
 	public int getId() {
-		return id;
+		return getInt("id");
 	}
 
 	/**
@@ -39,7 +43,7 @@ public class Article {
 	 *            the id to set
 	 */
 	public void setId(int id) {
-		this.id = id;
+		put("id", id);
 	}
 
 	/**

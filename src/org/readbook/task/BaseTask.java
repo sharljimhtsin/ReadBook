@@ -17,6 +17,7 @@ import android.os.Handler;
  * 
  * @author dingmaolin
  * @modify_by Administrator at 2014年11月10日 下午2:37:52
+ * 
  */
 public class BaseTask extends AsyncTask<Void, Void, Void> {
 
@@ -33,6 +34,8 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 
 	/**
 	 * 初始化全局传递参数
+	 * 
+	 * @deprecated
 	 */
 	protected void setRequestParams() {
 		httpHelper = new HttpHelper();
