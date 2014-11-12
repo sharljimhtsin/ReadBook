@@ -1,9 +1,5 @@
 package org.readbook.entity;
 
-import org.readbook.clz.MyApplication;
-
-import android.text.TextUtils;
-
 /**
  * @author Administrator
  *
@@ -18,20 +14,65 @@ public class BaseRequest {
 	private String qq = ""; // QQ号码
 	private String name = ""; // 用户真实姓名
 	private String email = ""; // 用户email
+	private String password = "";
 	// user info parameters
-	private String sex = "1"; // 性别|0:女|1:男
-	private String age = ""; // 用户年龄段
+	private int sex = 1; // 性别|0:女|1:男
+	private int age = 0; // 用户年龄段
 	// article parameters
 	private String docTypeId = ""; // 段子类别
 	private String docCategoryId = ""; // 段子类型
 	private String articleId = ""; // 段子id
 
 	/**
+	 * @return the deviceID
+	 */
+	public String getDeviceID() {
+		return deviceID;
+	}
+
+	/**
+	 * @param deviceID
+	 *            the deviceID to set
+	 */
+	public void setDeviceID(String deviceID) {
+		this.deviceID = deviceID;
+	}
+
+	/**
+	 * @return the page
+	 */
+	public int getPage() {
+		return page;
+	}
+
+	/**
+	 * @param page
+	 *            the page to set
+	 */
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+	/**
+	 * @return the pageSize
+	 */
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	/**
+	 * @param pageSize
+	 *            the pageSize to set
+	 */
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	/**
 	 * @return the phoneNumber
 	 */
 	public String getPhoneNumber() {
-		return TextUtils.isEmpty(phoneNumber) ? MyApplication.getInstance()
-				.getDeviceID() : phoneNumber;
+		return phoneNumber;
 	}
 
 	/**
@@ -46,8 +87,7 @@ public class BaseRequest {
 	 * @return the qq
 	 */
 	public String getQq() {
-		return TextUtils.isEmpty(qq) ? MyApplication.getInstance()
-				.getDeviceID() : qq;
+		return qq;
 	}
 
 	/**
@@ -62,8 +102,7 @@ public class BaseRequest {
 	 * @return the name
 	 */
 	public String getName() {
-		return TextUtils.isEmpty(name) ? MyApplication.getInstance()
-				.getDeviceID() : name;
+		return name;
 	}
 
 	/**
@@ -75,41 +114,10 @@ public class BaseRequest {
 	}
 
 	/**
-	 * @return the sex
-	 */
-	public String getSex() {
-		return sex;
-	}
-
-	/**
-	 * @param sex
-	 *            the sex to set
-	 */
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
-
-	/**
-	 * @return the age
-	 */
-	public String getAge() {
-		return age;
-	}
-
-	/**
-	 * @param age
-	 *            the age to set
-	 */
-	public void setAge(String age) {
-		this.age = age;
-	}
-
-	/**
 	 * @return the email
 	 */
 	public String getEmail() {
-		return TextUtils.isEmpty(email) ? MyApplication.getInstance()
-				.getDeviceID() : email;
+		return email;
 	}
 
 	/**
@@ -118,6 +126,21 @@ public class BaseRequest {
 	 */
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @param password
+	 *            the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	/**
@@ -166,48 +189,33 @@ public class BaseRequest {
 	}
 
 	/**
-	 * @return the deviceID
+	 * @return the sex
 	 */
-	public String getDeviceID() {
-		return TextUtils.isEmpty(deviceID) ? MyApplication.getInstance()
-				.getDeviceID() : deviceID;
+	public int getSex() {
+		return sex;
 	}
 
 	/**
-	 * @param deviceID
-	 *            the deviceID to set
+	 * @param sex
+	 *            the sex to set
 	 */
-	public void setDeviceID(String deviceID) {
-		this.deviceID = deviceID;
+	public void setSex(int sex) {
+		this.sex = sex;
 	}
 
 	/**
-	 * @return the page
+	 * @return the age
 	 */
-	public int getPage() {
-		return page;
+	public int getAge() {
+		return age;
 	}
 
 	/**
-	 * @param page
-	 *            the page to set
+	 * @param age
+	 *            the age to set
 	 */
-	public void setPage(int page) {
-		this.page = page;
+	public void setAge(int age) {
+		this.age = age;
 	}
 
-	/**
-	 * @return the pageSize
-	 */
-	public int getPageSize() {
-		return pageSize;
-	}
-
-	/**
-	 * @param pageSize
-	 *            the pageSize to set
-	 */
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
-	}
 }

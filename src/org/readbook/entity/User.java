@@ -3,24 +3,23 @@
  */
 package org.readbook.entity;
 
-import com.avos.avoscloud.AVClassName;
-import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVUser;
 
 /**
  * @author Administrator
- *
+ *         <p>
+ *         AVUser user = new AVUser(); <br>
+ *         user.setUsername("steve");<br>
+ *         user.setPassword("f32@ds*@&dsa");<br>
+ *         user.setEmail("steve@company.com");<br>
+ *         user.setMobilePhoneNumber("123456");
+ *         </p>
  */
-@AVClassName("User")
-public class User extends AVObject {
-	private int id;
-	private String name;
+
+public class User extends AVUser {
 	private String alias;
 	private int age;
 	private int sex;
-	private String email;
-	private int isEmailBind;
-	private String phone;
-	private int isPhoneBind;
 	private String qq;
 	private String province;
 	private String city;
@@ -33,40 +32,10 @@ public class User extends AVObject {
 	private int role;
 
 	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-
-	/**
-	 * @param uid
-	 *            the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @param name
-	 *            the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
 	 * @return the alias
 	 */
 	public String getAlias() {
-		return alias;
+		return getString("alias");
 	}
 
 	/**
@@ -74,14 +43,14 @@ public class User extends AVObject {
 	 *            the alias to set
 	 */
 	public void setAlias(String alias) {
-		this.alias = alias;
+		put("alias", alias);
 	}
 
 	/**
 	 * @return the age
 	 */
 	public int getAge() {
-		return age;
+		return getInt("age");
 	}
 
 	/**
@@ -89,44 +58,14 @@ public class User extends AVObject {
 	 *            the age to set
 	 */
 	public void setAge(int age) {
-		this.age = age;
-	}
-
-	/**
-	 * @return the email
-	 */
-	public String getEmail() {
-		return email;
-	}
-
-	/**
-	 * @param email
-	 *            the email to set
-	 */
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	/**
-	 * @return the phone
-	 */
-	public String getPhone() {
-		return phone;
-	}
-
-	/**
-	 * @param phone
-	 *            the phone to set
-	 */
-	public void setPhone(String phone) {
-		this.phone = phone;
+		put("age", age);
 	}
 
 	/**
 	 * @return the qq
 	 */
 	public String getQq() {
-		return qq;
+		return getString("qq");
 	}
 
 	/**
@@ -134,14 +73,14 @@ public class User extends AVObject {
 	 *            the qq to set
 	 */
 	public void setQq(String qq) {
-		this.qq = qq;
+		put("qq", qq);
 	}
 
 	/**
 	 * @return the province
 	 */
 	public String getProvince() {
-		return province;
+		return getString("province");
 	}
 
 	/**
@@ -149,14 +88,14 @@ public class User extends AVObject {
 	 *            the province to set
 	 */
 	public void setProvince(String province) {
-		this.province = province;
+		put("province", province);
 	}
 
 	/**
 	 * @return the city
 	 */
 	public String getCity() {
-		return city;
+		return getString("city");
 	}
 
 	/**
@@ -164,14 +103,15 @@ public class User extends AVObject {
 	 *            the city to set
 	 */
 	public void setCity(String city) {
-		this.city = city;
+		put("city", city);
+		;
 	}
 
 	/**
 	 * @return the area
 	 */
 	public String getArea() {
-		return area;
+		return getString("area");
 	}
 
 	/**
@@ -179,14 +119,14 @@ public class User extends AVObject {
 	 *            the area to set
 	 */
 	public void setArea(String area) {
-		this.area = area;
+		put("area", area);
 	}
 
 	/**
 	 * @return the job
 	 */
 	public String getJob() {
-		return job;
+		return getString("job");
 	}
 
 	/**
@@ -194,14 +134,14 @@ public class User extends AVObject {
 	 *            the job to set
 	 */
 	public void setJob(String job) {
-		this.job = job;
+		put("job", job);
 	}
 
 	/**
 	 * @return the refer
 	 */
 	public String getRefer() {
-		return refer;
+		return getString("refer");
 	}
 
 	/**
@@ -209,14 +149,14 @@ public class User extends AVObject {
 	 *            the refer to set
 	 */
 	public void setRefer(String refer) {
-		this.refer = refer;
+		put("refer", refer);
 	}
 
 	/**
 	 * @return the level
 	 */
 	public int getLevel() {
-		return level;
+		return getInt("level");
 	}
 
 	/**
@@ -224,14 +164,14 @@ public class User extends AVObject {
 	 *            the level to set
 	 */
 	public void setLevel(int level) {
-		this.level = level;
+		put("level", level);
 	}
 
 	/**
 	 * @return the point
 	 */
 	public int getPoint() {
-		return point;
+		return getInt("point");
 	}
 
 	/**
@@ -239,14 +179,14 @@ public class User extends AVObject {
 	 *            the point to set
 	 */
 	public void setPoint(int point) {
-		this.point = point;
+		put("point", point);
 	}
 
 	/**
 	 * @return the totalPoint
 	 */
 	public int getTotalPoint() {
-		return totalPoint;
+		return getInt("totalPoint");
 	}
 
 	/**
@@ -254,44 +194,14 @@ public class User extends AVObject {
 	 *            the totalPoint to set
 	 */
 	public void setTotalPoint(int totalPoint) {
-		this.totalPoint = totalPoint;
-	}
-
-	/**
-	 * @return the isEmailBind
-	 */
-	public int getIsEmailBind() {
-		return isEmailBind;
-	}
-
-	/**
-	 * @param isEmailBind
-	 *            the isEmailBind to set
-	 */
-	public void setIsEmailBind(int isEmailBind) {
-		this.isEmailBind = isEmailBind;
-	}
-
-	/**
-	 * @return the isPhoneBind
-	 */
-	public int getIsPhoneBind() {
-		return isPhoneBind;
-	}
-
-	/**
-	 * @param isPhoneBind
-	 *            the isPhoneBind to set
-	 */
-	public void setIsPhoneBind(int isPhoneBind) {
-		this.isPhoneBind = isPhoneBind;
+		put("totalPoint", totalPoint);
 	}
 
 	/**
 	 * @return the role
 	 */
 	public int getRole() {
-		return role;
+		return getInt("role");
 	}
 
 	/**
@@ -299,14 +209,14 @@ public class User extends AVObject {
 	 *            the role to set
 	 */
 	public void setRole(int role) {
-		this.role = role;
+		put("role", role);
 	}
 
 	/**
 	 * @return the sex
 	 */
 	public int getSex() {
-		return sex;
+		return getInt("sex");
 	}
 
 	/**
@@ -314,6 +224,6 @@ public class User extends AVObject {
 	 *            the sex to set
 	 */
 	public void setSex(int sex) {
-		this.sex = sex;
+		put("sex", sex);
 	}
 }

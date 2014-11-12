@@ -10,29 +10,13 @@ import com.avos.avoscloud.AVObject;
  * @author Administrator
  *
  */
-@AVClassName("DocType")
+@AVClassName("Type")
 public class DocType extends AVObject {
-	private int id;
 	private String title;
 	private String description;
 	private String url;
 	private int totalCount;
 	private int childrenNode;
-
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	/**
 	 * @return the title

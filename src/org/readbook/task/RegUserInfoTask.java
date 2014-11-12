@@ -14,17 +14,19 @@ import android.os.Message;
 -------
 1. 获取用户基本信息，QQ账号，和支付宝信息
  */
-public class GetUserInfoTask extends BaseTask {
+public class RegUserInfoTask extends BaseTask {
 
-	public GetUserInfoTask(BaseRequest request, Handler handler) {
+	public RegUserInfoTask(BaseRequest request, Handler handler) {
 		super(request, handler);
 	}
 
 	@Override
 	protected Void doInBackground(Void... params) {
 		try {
-			User u = User.logIn(super.request.getName(),
-					super.request.getPassword(), User.class);
+			User user = new User();
+			user.setAge(super.request.getAge());
+			user.signUp();
+			User u = User.getCurrentUser(User.class);
 			if (u != null) {
 				if (handler != null) {
 					Message msg = handler.obtainMessage();

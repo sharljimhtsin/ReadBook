@@ -12,9 +12,8 @@ import com.avos.avoscloud.AVObject;
  * @author Administrator
  *
  */
-@AVClassName("Article")
+@AVClassName("Content")
 public class Article extends AVObject {
-	private int id;
 	private String title;
 	private String description;
 	private String url;
@@ -27,24 +26,9 @@ public class Article extends AVObject {
 	private int totalLike;
 	private int totalDislike;
 	private int totalRepost;
-	private int ParentType;
-	private int ParentCategory;
+	private int parentType;
+	private int parentCategory;
 	private ArrayList<String> keyword;
-
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return getInt("id");
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(int id) {
-		put("id", id);
-	}
 
 	/**
 	 * @return the title
@@ -227,36 +211,6 @@ public class Article extends AVObject {
 	}
 
 	/**
-	 * @return the parentType
-	 */
-	public int getParentType() {
-		return ParentType;
-	}
-
-	/**
-	 * @param parentType
-	 *            the parentType to set
-	 */
-	public void setParentType(int parentType) {
-		ParentType = parentType;
-	}
-
-	/**
-	 * @return the parentCategory
-	 */
-	public int getParentCategory() {
-		return ParentCategory;
-	}
-
-	/**
-	 * @param parentCategory
-	 *            the parentCategory to set
-	 */
-	public void setParentCategory(int parentCategory) {
-		ParentCategory = parentCategory;
-	}
-
-	/**
 	 * @return the keyword
 	 */
 	public ArrayList<String> getKeyword() {
@@ -269,5 +223,35 @@ public class Article extends AVObject {
 	 */
 	public void setKeyword(ArrayList<String> keyword) {
 		this.keyword = keyword;
+	}
+
+	/**
+	 * @return the parentType
+	 */
+	public int getParentType() {
+		return parentType;
+	}
+
+	/**
+	 * @param parentType
+	 *            the parentType to set
+	 */
+	public void setParentType(int parentType) {
+		this.parentType = parentType;
+	}
+
+	/**
+	 * @return the parentCategory
+	 */
+	public int getParentCategory() {
+		return parentCategory;
+	}
+
+	/**
+	 * @param parentCategory
+	 *            the parentCategory to set
+	 */
+	public void setParentCategory(int parentCategory) {
+		this.parentCategory = parentCategory;
 	}
 }

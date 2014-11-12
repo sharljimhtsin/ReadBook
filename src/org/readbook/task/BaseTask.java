@@ -24,7 +24,7 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 	private final static String key = "abcd";
 	protected Handler handler;
 	protected BaseRequest request;
-	protected Map<String, String> map;
+	protected Map<String, Object> map;
 	protected HttpHelper httpHelper;
 
 	public BaseTask(BaseRequest request, Handler handler) {
@@ -56,13 +56,13 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 		String name = request.getName();
 		String email = request.getEmail();
 		// logic fields
-		String sex = request.getSex();
-		String age = request.getAge();
+		int sex = request.getSex();
+		int age = request.getAge();
 		String docTypeId = request.getDocTypeId();
 		String docCategoryId = request.getDocCategoryId();
 		String articleId = request.getArticleId();
 
-		map = new LinkedHashMap<String, String>();
+		map = new LinkedHashMap<String, Object>();
 		map.put("imei", imei);
 		map.put("os_version", os_version);
 		map.put("device_name", device_name);
@@ -84,8 +84,8 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 		map.put("verify", key);
 
 		String verifyString = "";
-		for (String s : map.values()) {
-			verifyString += s;
+		for (Object s : map.values()) {
+			verifyString += String.valueOf(s);
 		}
 		String verify = MD5.encode(verifyString);
 		map.put("verify", verify);

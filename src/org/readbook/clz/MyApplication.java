@@ -21,7 +21,6 @@ import android.text.TextUtils;
 import android.widget.Toast;
 import cn.jpush.android.api.JPushInterface;
 
-import com.avos.avoscloud.AVCloud;
 import com.avos.avoscloud.AVOSCloud;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -59,7 +58,7 @@ public class MyApplication extends Application {
 		JPushInterface.init(this); // 初始化 JPush
 
 		// initial leanCloud
-		AVOSCloud.initialize(this, "", "");
+		AVOSCloud.initialize(this, "s2iaxhxaaka1dsi6iz6ou2nwsnnywjzqjng80vn85rz3tepk", "ocbktichi5ddjqg3s7akw6dxg9ixm1m83t7jbbhsm2aft5e4");
 
 		mLocationClient = new LocationClient(this.getApplicationContext());
 		mMyLocationListener = new MyLocationListener();
@@ -69,102 +68,6 @@ public class MyApplication extends Application {
 
 	public static MyApplication getInstance() {
 		return instance;
-	}
-
-	/**
-	 * 服务器返回给客户端的唯一ID
-	 * 
-	 * @return
-	 */
-	public String getDeviceID() {
-		return sharedPreferences
-				.getString(Constants.ShareRefrence.deviceID, "");
-	}
-
-	public void setDeviceID(String s) {
-		sharedPreferences.edit().putString(Constants.ShareRefrence.deviceID, s);
-		sharedPreferences.edit().commit();
-	}
-
-	/**
-	 * 服务器返回给客户端的手机号码
-	 * 
-	 * @return
-	 */
-	public String getPhoneNumber() {
-		return sharedPreferences.getString(Constants.ShareRefrence.phoneNumber,
-				"");
-	}
-
-	public void setPhoneNumber(String s) {
-		sharedPreferences.edit().putString(Constants.ShareRefrence.phoneNumber,
-				s);
-		sharedPreferences.edit().commit();
-	}
-
-	/**
-	 * 该设备绑定状态 1未绑定 0已绑定
-	 * 
-	 * @return
-	 */
-	public int getIsPhoneBind() {
-		return sharedPreferences.getInt(Constants.ShareRefrence.isPhoneBind, 1);
-	}
-
-	public void setIsPhoneBind(int s) {
-		sharedPreferences.edit().putInt(Constants.ShareRefrence.isPhoneBind, s);
-		sharedPreferences.edit().commit();
-	}
-
-	public int getIsEmailBind() {
-		return sharedPreferences.getInt(Constants.ShareRefrence.isEmailBind, 1);
-	}
-
-	public void setIsEmailBind(int s) {
-		sharedPreferences.edit().putInt(Constants.ShareRefrence.isEmailBind, s);
-		sharedPreferences.edit().commit();
-	}
-
-	/**
-	 * QQ号码
-	 * 
-	 * @return
-	 */
-	public String getQQ() {
-		return sharedPreferences.getString(Constants.ShareRefrence.qq, "");
-	}
-
-	public void setQQ(String s) {
-		sharedPreferences.edit().putString(Constants.ShareRefrence.qq, s);
-		sharedPreferences.edit().commit();
-	}
-
-	/**
-	 * 性别|0:女|1:男
-	 * 
-	 * @return
-	 */
-	public String getName() {
-		return sharedPreferences.getString(Constants.ShareRefrence.name, "");
-	}
-
-	public void setName(String s) {
-		sharedPreferences.edit().putString(Constants.ShareRefrence.name, s);
-		sharedPreferences.edit().commit();
-	}
-
-	/**
-	 * 用户email
-	 * 
-	 * @return
-	 */
-	public String getEmail() {
-		return sharedPreferences.getString(Constants.ShareRefrence.email, "");
-	}
-
-	public void setEmail(String s) {
-		sharedPreferences.edit().putString(Constants.ShareRefrence.email, s);
-		sharedPreferences.edit().commit();
 	}
 
 	public String getLocationProvince() {

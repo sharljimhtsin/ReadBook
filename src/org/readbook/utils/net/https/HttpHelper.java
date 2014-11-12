@@ -68,7 +68,6 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
-import org.readbook.res.Constants;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -122,7 +121,7 @@ public class HttpHelper {
 	}
 
 	public String getHost() {
-		return Constants.Host.host;
+		return "";
 	}
 
 	public String httpExecute(HttpUriRequest request)
