@@ -13,10 +13,17 @@ import com.avos.avoscloud.AVObject;
 @AVClassName("Type")
 public class DocType extends AVObject {
 	private String title;
-	private String description;
+	private String subTitle;
 	private String url;
 	private int totalCount;
 	private int childrenNode;
+
+	/**
+	 * 
+	 */
+	public DocType() {
+		super();
+	}
 
 	/**
 	 * @return the title
@@ -31,21 +38,6 @@ public class DocType extends AVObject {
 	 */
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
-
-	/**
-	 * @param description
-	 *            the description to set
-	 */
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	/**

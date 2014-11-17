@@ -94,6 +94,7 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 
 	@Override
 	protected Void doInBackground(Void... params) {
+		handler.sendMessage(handler.obtainMessage(1));
 		return null;
 	}
 }

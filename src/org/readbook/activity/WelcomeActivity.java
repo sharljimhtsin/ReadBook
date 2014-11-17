@@ -1,5 +1,6 @@
 package org.readbook.activity;
 
+import org.readbook.R;
 import org.readbook.clz.MyApplication;
 import org.readbook.entity.BaseRequest;
 import org.readbook.task.BaseTask;
@@ -49,7 +50,7 @@ public class WelcomeActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(0);
+		setContentView(R.layout.start_layout);
 		MyApplication.getInstance().mLocationClient.start();
 		BaseRequest request = new BaseRequest();
 		BaseTask indexTask = new BaseTask(request, handler);

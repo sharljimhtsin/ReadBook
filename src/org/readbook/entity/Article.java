@@ -4,6 +4,7 @@
 package org.readbook.entity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.avos.avoscloud.AVClassName;
 import com.avos.avoscloud.AVObject;
@@ -15,10 +16,10 @@ import com.avos.avoscloud.AVObject;
 @AVClassName("Content")
 public class Article extends AVObject {
 	private String title;
-	private String description;
+	private String subTitle;
 	private String url;
 	private String content;
-	private int author;
+	private String author;
 	private String createTime;
 	private String lastModify;
 	private int totalRead;
@@ -34,7 +35,7 @@ public class Article extends AVObject {
 	 * @return the title
 	 */
 	public String getTitle() {
-		return title;
+		return getString("title");
 	}
 
 	/**
@@ -42,29 +43,14 @@ public class Article extends AVObject {
 	 *            the title to set
 	 */
 	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
-
-	/**
-	 * @param description
-	 *            the description to set
-	 */
-	public void setDescription(String description) {
-		this.description = description;
+		put("title", title);
 	}
 
 	/**
 	 * @return the url
 	 */
 	public String getUrl() {
-		return url;
+		return getString("url");
 	}
 
 	/**
@@ -72,14 +58,14 @@ public class Article extends AVObject {
 	 *            the url to set
 	 */
 	public void setUrl(String url) {
-		this.url = url;
+		put("url", url);
 	}
 
 	/**
 	 * @return the content
 	 */
 	public String getContent() {
-		return content;
+		return getString("content");
 	}
 
 	/**
@@ -87,29 +73,29 @@ public class Article extends AVObject {
 	 *            the content to set
 	 */
 	public void setContent(String content) {
-		this.content = content;
+		put("content", content);
 	}
 
 	/**
 	 * @return the author
 	 */
-	public int getAuthor() {
-		return author;
+	public String getAuthor() {
+		return getString("author");
 	}
 
 	/**
 	 * @param author
 	 *            the author to set
 	 */
-	public void setAuthor(int author) {
-		this.author = author;
+	public void setAuthor(String author) {
+		put("author", author);
 	}
 
 	/**
 	 * @return the createTime
 	 */
 	public String getCreateTime() {
-		return createTime;
+		return getString("createTime");
 	}
 
 	/**
@@ -117,14 +103,14 @@ public class Article extends AVObject {
 	 *            the createTime to set
 	 */
 	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
+		put("createTime", createTime);
 	}
 
 	/**
 	 * @return the lastModify
 	 */
 	public String getLastModify() {
-		return lastModify;
+		return getString("lastModify");
 	}
 
 	/**
@@ -132,14 +118,14 @@ public class Article extends AVObject {
 	 *            the lastModify to set
 	 */
 	public void setLastModify(String lastModify) {
-		this.lastModify = lastModify;
+		put("lastModify", lastModify);
 	}
 
 	/**
 	 * @return the totalRead
 	 */
 	public int getTotalRead() {
-		return totalRead;
+		return getInt("totalRead");
 	}
 
 	/**
@@ -147,14 +133,14 @@ public class Article extends AVObject {
 	 *            the totalRead to set
 	 */
 	public void setTotalRead(int totalRead) {
-		this.totalRead = totalRead;
+		put("totalRead", totalRead);
 	}
 
 	/**
 	 * @return the totalComment
 	 */
 	public int getTotalComment() {
-		return totalComment;
+		return getInt("totalComment");
 	}
 
 	/**
@@ -162,14 +148,14 @@ public class Article extends AVObject {
 	 *            the totalComment to set
 	 */
 	public void setTotalComment(int totalComment) {
-		this.totalComment = totalComment;
+		put("totalComment", totalComment);
 	}
 
 	/**
 	 * @return the totalLike
 	 */
 	public int getTotalLike() {
-		return totalLike;
+		return getInt("totalLike");
 	}
 
 	/**
@@ -177,14 +163,14 @@ public class Article extends AVObject {
 	 *            the totalLike to set
 	 */
 	public void setTotalLike(int totalLike) {
-		this.totalLike = totalLike;
+		put("totalLike", totalLike);
 	}
 
 	/**
 	 * @return the totalDislike
 	 */
 	public int getTotalDislike() {
-		return totalDislike;
+		return getInt("totalDislike");
 	}
 
 	/**
@@ -192,14 +178,14 @@ public class Article extends AVObject {
 	 *            the totalDislike to set
 	 */
 	public void setTotalDislike(int totalDislike) {
-		this.totalDislike = totalDislike;
+		put("totalDislike", totalDislike);
 	}
 
 	/**
 	 * @return the totalRepost
 	 */
 	public int getTotalRepost() {
-		return totalRepost;
+		return getInt("totalRepost");
 	}
 
 	/**
@@ -207,14 +193,14 @@ public class Article extends AVObject {
 	 *            the totalRepost to set
 	 */
 	public void setTotalRepost(int totalRepost) {
-		this.totalRepost = totalRepost;
+		put("totalRepost", totalRepost);
 	}
 
 	/**
 	 * @return the keyword
 	 */
-	public ArrayList<String> getKeyword() {
-		return keyword;
+	public List<String> getKeyword() {
+		return getList("keyword");
 	}
 
 	/**
@@ -222,36 +208,51 @@ public class Article extends AVObject {
 	 *            the keyword to set
 	 */
 	public void setKeyword(ArrayList<String> keyword) {
-		this.keyword = keyword;
+		put("keyword", keyword);
 	}
 
 	/**
 	 * @return the parentType
 	 */
-	public int getParentType() {
-		return parentType;
+	public String getParentType() {
+		return getString("parentType");
 	}
 
 	/**
 	 * @param parentType
 	 *            the parentType to set
 	 */
-	public void setParentType(int parentType) {
-		this.parentType = parentType;
+	public void setParentType(String parentType) {
+		put("parentType", parentType);
 	}
 
 	/**
 	 * @return the parentCategory
 	 */
-	public int getParentCategory() {
-		return parentCategory;
+	public String getParentCategory() {
+		return getString("parentCategory");
 	}
 
 	/**
 	 * @param parentCategory
 	 *            the parentCategory to set
 	 */
-	public void setParentCategory(int parentCategory) {
-		this.parentCategory = parentCategory;
+	public void setParentCategory(String parentCategory) {
+		put("parentCategory", parentCategory);
+	}
+
+	/**
+	 * @return the subTitle
+	 */
+	public String getSubTitle() {
+		return getString("subTitle");
+	}
+
+	/**
+	 * @param subTitle
+	 *            the subTitle to set
+	 */
+	public void setSubTitle(String subTitle) {
+		put("subTitle", subTitle);
 	}
 }

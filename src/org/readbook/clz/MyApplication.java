@@ -3,6 +3,10 @@ package org.readbook.clz;
 import java.io.File;
 import java.util.UUID;
 
+import org.readbook.entity.Article;
+import org.readbook.entity.Comment;
+import org.readbook.entity.DocCategory;
+import org.readbook.entity.DocType;
 import org.readbook.res.Constants;
 import org.readbook.utils.SdcardManager;
 
@@ -19,9 +23,9 @@ import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.widget.Toast;
-import cn.jpush.android.api.JPushInterface;
 
 import com.avos.avoscloud.AVOSCloud;
+import com.avos.avoscloud.AVObject;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -54,11 +58,15 @@ public class MyApplication extends Application {
 		SdcardManager.prepare();
 		initImageLoader(this);
 
-		JPushInterface.setDebugMode(true); // 设置开启日志,发布时请关闭日志
-		JPushInterface.init(this); // 初始化 JPush
-
 		// initial leanCloud
 		AVOSCloud.initialize(this, "s2iaxhxaaka1dsi6iz6ou2nwsnnywjzqjng80vn85rz3tepk", "ocbktichi5ddjqg3s7akw6dxg9ixm1m83t7jbbhsm2aft5e4");
+		// register AVObject
+		AVObject.registerSubclass(DocType.class);
+		AVObject.registerSubclass(DocCategory.class);
+		AVObject.registerSubclass(Article.class);
+		AVObject.registerSubclass(Comment.class);
+		// set debug mode
+		AVOSCloud.setDebugLogEnabled(true);
 
 		mLocationClient = new LocationClient(this.getApplicationContext());
 		mMyLocationListener = new MyLocationListener();

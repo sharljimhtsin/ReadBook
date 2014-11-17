@@ -20,7 +20,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-import cn.sharesdk.analysis.MobclickAgent;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -93,12 +92,10 @@ public class BaseActivity extends Activity {
 
 	public void onResume() {
 		super.onResume();
-		MobclickAgent.onResume(this);
 	}
 	
 	public void onPause() {
 		super.onPause();
-		MobclickAgent.onPause(this);
 	}
 
 	@Override
