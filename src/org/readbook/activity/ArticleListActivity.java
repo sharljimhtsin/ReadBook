@@ -33,7 +33,7 @@ public class ArticleListActivity extends BaseActivity {
 		request.setDocTypeId(typeId);
 		ArticleListTask task = new ArticleListTask(request, mHandler);
 		task.execute();
-		startLoading();
+		// startLoading();
 	}
 
 	private void init() {

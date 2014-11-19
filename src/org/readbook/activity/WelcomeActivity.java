@@ -1,5 +1,6 @@
 package org.readbook.activity;
 
+import org.readbook.MainActivity;
 import org.readbook.R;
 import org.readbook.clz.MyApplication;
 import org.readbook.entity.BaseRequest;
@@ -33,7 +34,7 @@ public class WelcomeActivity extends BaseActivity {
 				}
 				break;
 			case 1:
-				startActivity(new Intent(WelcomeActivity.this, ArticleTypeListActivity.class));
+				startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
 				finish();
 				break;
 			case -1:
