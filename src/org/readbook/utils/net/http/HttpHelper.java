@@ -205,7 +205,7 @@ public class HttpHelper {
 		return this.httpExecute(new HttpGet(this.getURL(url)));
 	}
 
-	public String httpGet(String url, Map<String, String> params)
+	public String httpGet(String url, Map<String, Object> params)
 			throws ClientProtocolException, IOException {
 		if (url.startsWith("http://"))
 			return this.httpGet(QueryString.build(url, params));

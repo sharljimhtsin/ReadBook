@@ -11,6 +11,12 @@ public class Constants {
 	public static String net_error = "请检查网络";
 
 	public static final class Host {
+		public final static String host = "http://42.121.137.60:44778";
+		// Index
+		public final static String index = host + "/Home/Index/index";
+		// Task
+		public final static String getAvailable = host
+				+ "/Home/Task/getAvailable";
 	}
 
 	public static final class ShareRefrence {

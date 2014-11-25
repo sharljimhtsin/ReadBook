@@ -35,7 +35,6 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 	/**
 	 * 初始化全局传递参数
 	 * 
-	 * @deprecated
 	 */
 	protected void setRequestParams() {
 		httpHelper = new HttpHelper();

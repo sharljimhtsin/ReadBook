@@ -3,15 +3,12 @@
  */
 package org.readbook.entity;
 
-import com.avos.avoscloud.AVClassName;
-import com.avos.avoscloud.AVObject;
-
 /**
  * @author Administrator
  *
  */
-@AVClassName("Comment")
-public class Comment extends AVObject {
+
+public class Comment {
 	private String title;
 	private String content;
 	private int author;

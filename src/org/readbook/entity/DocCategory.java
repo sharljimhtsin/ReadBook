@@ -3,15 +3,12 @@
  */
 package org.readbook.entity;
 
-import com.avos.avoscloud.AVClassName;
-import com.avos.avoscloud.AVObject;
-
 /**
  * @author Administrator
  *
  */
-@AVClassName("Category")
-public class DocCategory extends AVObject {
+
+public class DocCategory {
 	private String title;
 	private String subTitle;
 	private String url;
@@ -31,6 +28,21 @@ public class DocCategory extends AVObject {
 	 */
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	/**
+	 * @return the subTitle
+	 */
+	public String getSubTitle() {
+		return subTitle;
+	}
+
+	/**
+	 * @param subTitle
+	 *            the subTitle to set
+	 */
+	public void setSubTitle(String subTitle) {
+		this.subTitle = subTitle;
 	}
 
 	/**
@@ -77,4 +89,5 @@ public class DocCategory extends AVObject {
 	public void setParentType(int parentType) {
 		this.parentType = parentType;
 	}
+
 }

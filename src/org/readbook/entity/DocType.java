@@ -3,27 +3,17 @@
  */
 package org.readbook.entity;
 
-import com.avos.avoscloud.AVClassName;
-import com.avos.avoscloud.AVObject;
-
 /**
  * @author Administrator
  *
  */
-@AVClassName("Type")
-public class DocType extends AVObject {
+
+public class DocType {
 	private String title;
 	private String subTitle;
 	private String url;
 	private int totalCount;
 	private int childrenNode;
-
-	/**
-	 * 
-	 */
-	public DocType() {
-		super();
-	}
 
 	/**
 	 * @return the title
@@ -38,6 +28,21 @@ public class DocType extends AVObject {
 	 */
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	/**
+	 * @return the subTitle
+	 */
+	public String getSubTitle() {
+		return subTitle;
+	}
+
+	/**
+	 * @param subTitle
+	 *            the subTitle to set
+	 */
+	public void setSubTitle(String subTitle) {
+		this.subTitle = subTitle;
 	}
 
 	/**
@@ -84,4 +89,5 @@ public class DocType extends AVObject {
 	public void setChildrenNode(int childrenNode) {
 		this.childrenNode = childrenNode;
 	}
+
 }
