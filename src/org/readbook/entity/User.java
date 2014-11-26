@@ -5,13 +5,6 @@ package org.readbook.entity;
 
 /**
  * @author Administrator
- *         <p>
- *         AVUser user = new AVUser(); <br>
- *         user.setUsername("steve");<br>
- *         user.setPassword("f32@ds*@&dsa");<br>
- *         user.setEmail("steve@company.com");<br>
- *         user.setMobilePhoneNumber("123456");
- *         </p>
  */
 
 public class User {

@@ -8,16 +8,15 @@ import org.readbook.entity.DocType;
 import org.readbook.res.Constants;
 import org.readbook.utils.LogUtil;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
 import android.os.Handler;
 import android.os.Message;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 /**
- * #获取可做任务列表 Task/getAvailable
- * 
- * ###功能 ------- 1. 返回可做任务数，可赚总金额 2. 返回可做任务信息列表 3. 返回分享文本和app下载地址 4. 返回顶部信息
+ * @author Administrator
+ *
  */
 public class ArticleTypeListTask extends BaseTask {
 
@@ -32,7 +31,7 @@ public class ArticleTypeListTask extends BaseTask {
 			String resultJson = httpHelper.httpGet(Constants.Host.index,
 					super.map);
 			LogUtil.logD(LogUtil.TAG,
-					"------TaskListAvailableTask receiver-------" + resultJson);
+					"------ArticleTypeListTask receiver-------" + resultJson);
 			JSONObject dataObject = new JSONObject(resultJson);
 			if (dataObject.getInt("status") == 1) {
 				String data = dataObject.getString("data");

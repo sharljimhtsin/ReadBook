@@ -2,6 +2,7 @@ package org.readbook.task;
 
 import java.util.List;
 
+import org.json.JSONObject;
 import org.readbook.entity.BaseRequest;
 import org.readbook.entity.DocCategory;
 import org.readbook.res.Constants;
@@ -10,18 +11,12 @@ import org.readbook.utils.LogUtil;
 import android.os.Handler;
 import android.os.Message;
 
-import com.avos.avoscloud.AVObject;
-import com.avos.avoscloud.AVQuery;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 /**
- * #获取可做任务列表 Task/getAvailable
-
-###功能
--------
-1. 返回可做任务数，可赚总金额
-2. 返回可做任务信息列表
-3. 返回分享文本和app下载地址
-4. 返回顶部信息
+ * @author Administrator
+ *
  */
 public class ArticleCategoryListTask extends BaseTask {
 
@@ -32,16 +27,23 @@ public class ArticleCategoryListTask extends BaseTask {
 	@Override
 	protected Void doInBackground(Void... params) {
 		try {
-			AVQuery<DocCategory> q = AVObject.getQuery(DocCategory.class);
-			q.setSkip((super.request.getPage() - 1)
-					* super.request.getPageSize());
-			q.setLimit(super.request.getPageSize());
-			List<DocCategory> result = q.find();
-			if (result != null) {
-				if (result.size() > 0) {
+			setRequestParams();
+			String resultJson = httpHelper.httpGet(Constants.Host.index,
+					super.map);
+			LogUtil.logD(LogUtil.TAG,
+					"------ArticleCategoryListTask receiver-------"
+							+ resultJson);
+			JSONObject dataObject = new JSONObject(resultJson);
+			if (dataObject.getInt("status") == 1) {
+				String data = dataObject.getString("data");
+				Gson gson = new Gson();
+				List<DocCategory> list = gson.fromJson(data,
+						new TypeToken<List<DocCategory>>() {
+						}.getType());
+				if (list.size() > 0) {
 					Message msg = new Message();
 					msg.what = 0;
-					msg.obj = result;
+					msg.obj = list;
 					handler.sendMessage(msg);
 				} else {
 					Message msg = handler.obtainMessage();
@@ -49,10 +51,7 @@ public class ArticleCategoryListTask extends BaseTask {
 					msg.what = -1;
 					handler.sendMessage(msg);
 				}
-				LogUtil.logD(
-						LogUtil.TAG,
-						"------TaskListAvailableTask receiver-------"
-								+ result.size());
+
 			} else {
 				Message msg = handler.obtainMessage();
 				msg.obj = "set null";

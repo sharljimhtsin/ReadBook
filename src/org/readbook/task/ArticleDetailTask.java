@@ -1,5 +1,6 @@
 package org.readbook.task;
 
+import org.json.JSONObject;
 import org.readbook.entity.Article;
 import org.readbook.entity.BaseRequest;
 import org.readbook.res.Constants;
@@ -8,11 +9,11 @@ import org.readbook.utils.LogUtil;
 import android.os.Handler;
 import android.os.Message;
 
-import com.avos.avoscloud.AVObject;
-import com.avos.avoscloud.AVQuery;
+import com.google.gson.Gson;
 
 /**
-#获取任务详情 Task/getDetail
+ * @author Administrator
+ *
  */
 public class ArticleDetailTask extends BaseTask {
 
@@ -23,17 +24,20 @@ public class ArticleDetailTask extends BaseTask {
 	@Override
 	protected Void doInBackground(Void... params) {
 		try {
-			AVQuery<Article> q = AVObject.getQuery(Article.class);
-			Article result = q.get(super.request.getArticleId());
-			if (result != null) {
+			setRequestParams();
+			String resultJson = httpHelper.httpGet(Constants.Host.index,
+					super.map);
+			LogUtil.logD(LogUtil.TAG, "------ArticleDetailTask receiver-------"
+					+ resultJson);
+			JSONObject dataObject = new JSONObject(resultJson);
+			if (dataObject.getInt("status") == 1) {
+				String data = dataObject.getString("data");
+				Gson gson = new Gson();
+				Article list = gson.fromJson(data, Article.class);
 				Message msg = new Message();
 				msg.what = 0;
-				msg.obj = result;
+				msg.obj = list;
 				handler.sendMessage(msg);
-				LogUtil.logD(
-						LogUtil.TAG,
-						"------TaskDetailTask receiver-------"
-								+ result.toString());
 			} else {
 				Message msg = handler.obtainMessage();
 				msg.obj = "object null";

@@ -87,7 +87,7 @@ public class ArticleTypeListAdapter extends BaseAdapter {
 		}
 		DocType docType = mList.get(position);
 		viewHolder.name.setText(docType.getTitle());
-		viewHolder.name.setTag(docType.getObjectId());
+		viewHolder.name.setTag(docType.getUrl());
 		return convertView;
 	}
 
