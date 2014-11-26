@@ -9,6 +9,7 @@ package org.readbook.entity;
  */
 
 public class DocCategory {
+	private int id;
 	private String title;
 	private String subTitle;
 	private String url;
@@ -88,6 +89,21 @@ public class DocCategory {
 	 */
 	public void setParentType(int parentType) {
 		this.parentType = parentType;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

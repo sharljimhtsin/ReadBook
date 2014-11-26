@@ -6,7 +6,7 @@ package org.readbook.clz.adapter;
 import java.util.List;
 
 import org.readbook.R;
-import org.readbook.entity.DocType;
+import org.readbook.entity.Article;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -19,17 +19,17 @@ import android.widget.TextView;
  * @author Administrator
  *
  */
-public class ArticleTypeListAdapter extends BaseAdapter {
+public class ArticleListAdapter extends BaseAdapter {
 
 	private Context mContext;
 	private LayoutInflater mInflater;
-	private List<DocType> mList;
+	private List<Article> mList;
 
 	/**
 	 * @param mContext
 	 * @param mList
 	 */
-	public ArticleTypeListAdapter(Context mContext, List<DocType> mList) {
+	public ArticleListAdapter(Context mContext, List<Article> mList) {
 		super();
 		this.mContext = mContext;
 		this.mList = mList;
@@ -85,9 +85,9 @@ public class ArticleTypeListAdapter extends BaseAdapter {
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
-		DocType docType = mList.get(position);
-		viewHolder.name.setText(docType.getTitle());
-		viewHolder.name.setTag(docType.getUrl());
+		Article article = mList.get(position);
+		viewHolder.name.setText(article.getTitle());
+		viewHolder.name.setTag(article.getUrl());
 		return convertView;
 	}
 

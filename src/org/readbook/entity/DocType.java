@@ -3,17 +3,21 @@
  */
 package org.readbook.entity;
 
+import java.util.List;
+
 /**
  * @author Administrator
  *
  */
 
 public class DocType {
+	private int id;
 	private String title;
 	private String subTitle;
 	private String url;
 	private int totalCount;
 	private int childrenNode;
+	private List<DocCategory> childrenList;
 
 	/**
 	 * @return the title
@@ -88,6 +92,36 @@ public class DocType {
 	 */
 	public void setChildrenNode(int childrenNode) {
 		this.childrenNode = childrenNode;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the childrenList
+	 */
+	public List<DocCategory> getChildrenList() {
+		return childrenList;
+	}
+
+	/**
+	 * @param childrenList
+	 *            the childrenList to set
+	 */
+	public void setChildrenList(List<DocCategory> childrenList) {
+		this.childrenList = childrenList;
 	}
 
 }

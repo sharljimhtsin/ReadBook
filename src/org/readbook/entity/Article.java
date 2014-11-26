@@ -11,6 +11,7 @@ import java.util.ArrayList;
  */
 
 public class Article {
+	private int id;
 	private String title;
 	private String subTitle;
 	private String url;
@@ -26,6 +27,7 @@ public class Article {
 	private int parentType;
 	private int parentCategory;
 	private ArrayList<String> keyword;
+	private ArrayList<String> pic;
 
 	/**
 	 * @return the title
@@ -250,6 +252,36 @@ public class Article {
 	 */
 	public void setKeyword(ArrayList<String> keyword) {
 		this.keyword = keyword;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the pic
+	 */
+	public ArrayList<String> getPic() {
+		return pic;
+	}
+
+	/**
+	 * @param pic
+	 *            the pic to set
+	 */
+	public void setPic(ArrayList<String> pic) {
+		this.pic = pic;
 	}
 
 }

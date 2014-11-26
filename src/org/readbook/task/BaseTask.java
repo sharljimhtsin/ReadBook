@@ -57,9 +57,9 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 		// logic fields
 		int sex = request.getSex();
 		int age = request.getAge();
-		String docTypeId = request.getDocTypeId();
-		String docCategoryId = request.getDocCategoryId();
-		String articleId = request.getArticleId();
+		int docTypeId = request.getDocTypeId();
+		int docCategoryId = request.getDocCategoryId();
+		int articleId = request.getArticleId();
 
 		map = new LinkedHashMap<String, Object>();
 		map.put("imei", imei);

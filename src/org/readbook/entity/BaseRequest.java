@@ -19,9 +19,9 @@ public class BaseRequest {
 	private int sex = 1; // 性别|0:女|1:男
 	private int age = 0; // 用户年龄段
 	// article parameters
-	private String docTypeId = ""; // 段子类别
-	private String docCategoryId = ""; // 段子类型
-	private String articleId = ""; // 段子id
+	private int docTypeId = 0; // 段子类别
+	private int docCategoryId = 0; // 段子类型
+	private int articleId = 0; // 段子id
 
 	/**
 	 * @return the deviceID
@@ -144,51 +144,6 @@ public class BaseRequest {
 	}
 
 	/**
-	 * @return the docTypeId
-	 */
-	public String getDocTypeId() {
-		return docTypeId;
-	}
-
-	/**
-	 * @param docTypeId
-	 *            the docTypeId to set
-	 */
-	public void setDocTypeId(String docTypeId) {
-		this.docTypeId = docTypeId;
-	}
-
-	/**
-	 * @return the docCategoryId
-	 */
-	public String getDocCategoryId() {
-		return docCategoryId;
-	}
-
-	/**
-	 * @param docCategoryId
-	 *            the docCategoryId to set
-	 */
-	public void setDocCategoryId(String docCategoryId) {
-		this.docCategoryId = docCategoryId;
-	}
-
-	/**
-	 * @return the articleId
-	 */
-	public String getArticleId() {
-		return articleId;
-	}
-
-	/**
-	 * @param articleId
-	 *            the articleId to set
-	 */
-	public void setArticleId(String articleId) {
-		this.articleId = articleId;
-	}
-
-	/**
 	 * @return the sex
 	 */
 	public int getSex() {
@@ -216,6 +171,51 @@ public class BaseRequest {
 	 */
 	public void setAge(int age) {
 		this.age = age;
+	}
+
+	/**
+	 * @return the docTypeId
+	 */
+	public int getDocTypeId() {
+		return docTypeId;
+	}
+
+	/**
+	 * @param docTypeId
+	 *            the docTypeId to set
+	 */
+	public void setDocTypeId(int docTypeId) {
+		this.docTypeId = docTypeId;
+	}
+
+	/**
+	 * @return the docCategoryId
+	 */
+	public int getDocCategoryId() {
+		return docCategoryId;
+	}
+
+	/**
+	 * @param docCategoryId
+	 *            the docCategoryId to set
+	 */
+	public void setDocCategoryId(int docCategoryId) {
+		this.docCategoryId = docCategoryId;
+	}
+
+	/**
+	 * @return the articleId
+	 */
+	public int getArticleId() {
+		return articleId;
+	}
+
+	/**
+	 * @param articleId
+	 *            the articleId to set
+	 */
+	public void setArticleId(int articleId) {
+		this.articleId = articleId;
 	}
 
 }

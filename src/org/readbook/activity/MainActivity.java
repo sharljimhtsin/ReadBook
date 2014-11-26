@@ -1,10 +1,14 @@
 package org.readbook.activity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.readbook.R;
+import org.readbook.clz.adapter.ArticleListAdapter;
+import org.readbook.clz.adapter.MyPagerAdapter;
 import org.readbook.entity.Article;
 import org.readbook.entity.BaseRequest;
+import org.readbook.entity.DocCategory;
 import org.readbook.entity.DocType;
 import org.readbook.task.ArticleListTask;
 import org.readbook.task.ArticleTypeListTask;
@@ -14,15 +18,22 @@ import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements OnPageChangeListener,
+		OnItemClickListener {
 
 	private HorizontalScrollView mTypeScrollView;
 	private HorizontalScrollView mCategoryScrollView;
 	private ViewPager mViewPager;
+	private ListView mCurrentListView;
 	private Handler mHandler;
 
 	/*
@@ -44,8 +55,9 @@ public class MainActivity extends BaseActivity {
 		task.execute();
 	}
 
-	private void queryList() {
+	private void queryList(DocCategory category) {
 		BaseRequest request = new BaseRequest();
+		request.setDocCategoryId(category.getId());
 		ArticleListTask task = new ArticleListTask(request, mHandler);
 		task.execute();
 	}
@@ -62,7 +74,9 @@ public class MainActivity extends BaseActivity {
 				case 0:
 					List<DocType> list = (List<DocType>) msg.obj;
 					bindMenu(list);
-					queryList();
+					buildViewPager(list.get(0).getChildrenList());
+					// build article list with default first one
+					queryList(list.get(0).getChildrenList().get(0));
 					break;
 				case 1:
 					List<Article> list2 = (List<Article>) msg.obj;
@@ -72,7 +86,7 @@ public class MainActivity extends BaseActivity {
 				default:
 					break;
 				}
-				return false;
+				return true;
 			}
 		});
 	}
@@ -100,7 +114,48 @@ public class MainActivity extends BaseActivity {
 		}
 	}
 
+	private void buildViewPager(List<DocCategory> list) {
+		List<View> viewlist = new ArrayList<View>();
+		for (DocCategory category : list) {
+			ListView listView = new ListView(mContext);
+			listView.setTag(category);
+			viewlist.add(listView);
+		}
+		mViewPager.setAdapter(new MyPagerAdapter(viewlist));
+		mViewPager.setCurrentItem(0);
+		mViewPager.setOnPageChangeListener(this);
+	}
+
 	private void bindList(List<Article> list) {
+		mCurrentListView.setAdapter(new ArticleListAdapter(mContext, list));
+		mCurrentListView.setOnItemClickListener(this);
+	}
+
+	@Override
+	public void onPageScrollStateChanged(int arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onPageScrolled(int arg0, float arg1, int arg2) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onPageSelected(int arg0) {
+		mCurrentListView = (ListView) ((MyPagerAdapter) mViewPager.getAdapter())
+				.getViewByPosition(arg0);
+		// do binding
+		DocCategory category = (DocCategory) mCurrentListView.getTag();
+		queryList(category);
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		// TODO Auto-generated method stub
 
 	}
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.readbook.R;
 import org.readbook.clz.MyApplication;
-import org.readbook.clz.adapter.ArticleTypeListAdapter;
+import org.readbook.clz.adapter.ArticleListAdapter;
 import org.readbook.entity.BaseRequest;
 import org.readbook.entity.DocType;
 import org.readbook.task.ArticleTypeListTask;
@@ -70,7 +70,7 @@ public class ArticleTypeListActivity extends BaseActivity implements
 
 	private void buildUI(List<DocType> list) {
 		GridView gridView = (GridView) findViewById(R.id.gridView_article_type_list);
-		ArticleTypeListAdapter adapter = new ArticleTypeListAdapter(this, list);
+		ArticleListAdapter adapter = new ArticleListAdapter(this, list);
 		gridView.setAdapter(adapter);
 		gridView.setOnItemClickListener(this);
 	}

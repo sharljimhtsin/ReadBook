@@ -27,7 +27,7 @@ public class ArticleListActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		String typeId = getIntent().getStringExtra("typeId");
+		int typeId = getIntent().getIntExtra("typeId", 0);
 		init();
 		BaseRequest request = new BaseRequest();
 		request.setDocTypeId(typeId);
