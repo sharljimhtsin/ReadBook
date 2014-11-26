@@ -1,6 +1,5 @@
 package org.readbook.activity;
 
-import org.readbook.MainActivity;
 import org.readbook.R;
 import org.readbook.clz.MyApplication;
 import org.readbook.entity.BaseRequest;
