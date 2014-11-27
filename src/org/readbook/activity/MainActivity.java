@@ -27,6 +27,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+
 public class MainActivity extends BaseActivity implements OnPageChangeListener,
 		OnItemClickListener {
 
@@ -35,6 +37,7 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 	private ViewPager mViewPager;
 	private ListView mCurrentListView;
 	private Handler mHandler;
+	private SlidingMenu mSlidingMenu;
 
 	/*
 	 * (non-Javadoc)
@@ -46,7 +49,7 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 		super.onCreate(savedInstanceState);
 		initUI();
 		prepareHandler();
-		queryMenu();
+		// queryMenu();
 	}
 
 	private void queryMenu() {
@@ -96,6 +99,15 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 		mTypeScrollView = (HorizontalScrollView) findViewById(R.id.horizontalScrollView_typeList);
 		mCategoryScrollView = (HorizontalScrollView) findViewById(R.id.horizontalScrollView_categoryList);
 		mViewPager = (ViewPager) findViewById(R.id.ViewPager_articleList);
+		// configure the SlidingMenu
+		mSlidingMenu = new SlidingMenu(mContext);
+		mSlidingMenu.setMode(SlidingMenu.RIGHT);
+		mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		mSlidingMenu.setShadowWidthRes(R.dimen.shadow_width);
+		mSlidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+		mSlidingMenu.setFadeDegree(0.35f);
+		mSlidingMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+		mSlidingMenu.setMenu(R.layout.title_layout);
 	}
 
 	private void bindMenu(List<DocType> list) {
