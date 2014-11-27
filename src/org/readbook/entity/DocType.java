@@ -20,6 +20,27 @@ public class DocType {
 	private List<DocCategory> childrenList;
 
 	/**
+	 * @param id
+	 * @param title
+	 * @param subTitle
+	 * @param url
+	 * @param totalCount
+	 * @param childrenNode
+	 * @param childrenList
+	 */
+	public DocType(int id, String title, String subTitle, String url,
+			int totalCount, int childrenNode, List<DocCategory> childrenList) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.subTitle = subTitle;
+		this.url = url;
+		this.totalCount = totalCount;
+		this.childrenNode = childrenNode;
+		this.childrenList = childrenList;
+	}
+
+	/**
 	 * @return the title
 	 */
 	public String getTitle() {

@@ -17,6 +17,25 @@ public class DocCategory {
 	private int parentType;
 
 	/**
+	 * @param id
+	 * @param title
+	 * @param subTitle
+	 * @param url
+	 * @param totalCount
+	 * @param parentType
+	 */
+	public DocCategory(int id, String title, String subTitle, String url,
+			int totalCount, int parentType) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.subTitle = subTitle;
+		this.url = url;
+		this.totalCount = totalCount;
+		this.parentType = parentType;
+	}
+
+	/**
 	 * @return the title
 	 */
 	public String getTitle() {
