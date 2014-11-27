@@ -49,7 +49,7 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 		super.onCreate(savedInstanceState);
 		initUI();
 		prepareHandler();
-		// queryMenu();
+		queryMenu();
 	}
 
 	private void queryMenu() {
@@ -115,14 +115,14 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 		for (DocType docType : list) {
 			TextView textView = new TextView(mContext);
 			textView.setText(docType.getTitle());
-			layout.addView(layout);
+			layout.addView(textView);
 		}
 		// build submenu with default first one
 		layout = (LinearLayout) mCategoryScrollView.getChildAt(0);
 		for (DocType docType : list) {
 			TextView textView = new TextView(mContext);
 			textView.setText(docType.getTitle());
-			layout.addView(layout);
+			layout.addView(textView);
 		}
 	}
 
