@@ -44,7 +44,7 @@ public class ArticleTypeListActivity extends BaseActivity implements
 		BaseRequest request = new BaseRequest();
 		ArticleTypeListTask task = new ArticleTypeListTask(request, mHandler);
 		task.execute();
-//		startLoading();
+		// startLoading();
 	}
 
 	private void init() {
@@ -54,7 +54,7 @@ public class ArticleTypeListActivity extends BaseActivity implements
 			public boolean handleMessage(Message msg) {
 				switch (msg.what) {
 				case 0:
-//					stopLoading();
+					// stopLoading();
 					buildUI((List<DocType>) msg.obj);
 					break;
 				case -1:
@@ -70,7 +70,7 @@ public class ArticleTypeListActivity extends BaseActivity implements
 
 	private void buildUI(List<DocType> list) {
 		GridView gridView = (GridView) findViewById(R.id.gridView_article_type_list);
-		ArticleListAdapter adapter = new ArticleListAdapter(this, list);
+		ArticleListAdapter adapter = new ArticleListAdapter(this, null);
 		gridView.setAdapter(adapter);
 		gridView.setOnItemClickListener(this);
 	}
