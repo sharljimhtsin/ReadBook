@@ -30,6 +30,50 @@ public class Article {
 	private ArrayList<String> pic;
 
 	/**
+	 * @param id
+	 * @param title
+	 * @param subTitle
+	 * @param url
+	 * @param content
+	 * @param author
+	 * @param createTime
+	 * @param lastModify
+	 * @param totalRead
+	 * @param totalComment
+	 * @param totalLike
+	 * @param totalDislike
+	 * @param totalRepost
+	 * @param parentType
+	 * @param parentCategory
+	 * @param keyword
+	 * @param pic
+	 */
+	public Article(int id, String title, String subTitle, String url,
+			String content, String author, String createTime,
+			String lastModify, int totalRead, int totalComment, int totalLike,
+			int totalDislike, int totalRepost, int parentType,
+			int parentCategory, ArrayList<String> keyword, ArrayList<String> pic) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.subTitle = subTitle;
+		this.url = url;
+		this.content = content;
+		this.author = author;
+		this.createTime = createTime;
+		this.lastModify = lastModify;
+		this.totalRead = totalRead;
+		this.totalComment = totalComment;
+		this.totalLike = totalLike;
+		this.totalDislike = totalDislike;
+		this.totalRepost = totalRepost;
+		this.parentType = parentType;
+		this.parentCategory = parentCategory;
+		this.keyword = keyword;
+		this.pic = pic;
+	}
+
+	/**
 	 * @return the title
 	 */
 	public String getTitle() {

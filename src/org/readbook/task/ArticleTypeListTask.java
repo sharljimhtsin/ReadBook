@@ -38,16 +38,34 @@ public class ArticleTypeListTask extends BaseTask {
 			// build json string for test START
 			GsonBuilder gsonBuilder = new GsonBuilder();
 			Gson g = gsonBuilder.create();
-			DocCategory docCategory = new DocCategory(1, "xx", "xx", "xx", 1, 1);
+			DocCategory docCategory = new DocCategory(1, "xxxxxxxx",
+					"xxxxxxxx", "xxxxxxxx", 1, 1);
 			List<DocCategory> l = new ArrayList<DocCategory>();
+			List<DocCategory> lepy = new ArrayList<DocCategory>();
 			l.add(docCategory);
-			DocType docType = new DocType(11, "", "", "", 1, 2, l);
+			l.add(docCategory);
+			l.add(docCategory);
+			l.add(docCategory);
+			l.add(docCategory);
+			l.add(docCategory);
+			l.add(docCategory);
+			DocType docType = new DocType(11, "aaaaaaaa", "bbbbbb", "cccccccc",
+					1, 2, l);
+			DocType docTypeepy = new DocType(11, "aaaaaaaa", "bbbbbb",
+					"cccccccc", 1, 2, lepy);
 			List<DocType> ll = new ArrayList<DocType>();
 			ll.add(docType);
+			ll.add(docType);
+			ll.add(docType);
+			ll.add(docType);
+			ll.add(docType);
+			ll.add(docType);
+			ll.add(docType);
+			ll.add(docTypeepy);
 			Response response = new Response(1, ll);
+			String resultJson = g.toJson(response);
 			// build json string for test END
 
-			String resultJson = g.toJson(response);
 			LogUtil.logD(LogUtil.TAG,
 					"------ArticleTypeListTask receiver-------" + resultJson);
 			JSONObject dataObject = new JSONObject(resultJson);

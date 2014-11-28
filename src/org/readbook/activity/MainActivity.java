@@ -1,6 +1,7 @@
 package org.readbook.activity;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.readbook.R;
@@ -13,6 +14,7 @@ import org.readbook.entity.DocType;
 import org.readbook.task.ArticleListTask;
 import org.readbook.task.ArticleTypeListTask;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Handler.Callback;
@@ -20,6 +22,7 @@ import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.HorizontalScrollView;
@@ -30,7 +33,7 @@ import android.widget.TextView;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 public class MainActivity extends BaseActivity implements OnPageChangeListener,
-		OnItemClickListener {
+		OnItemClickListener, OnClickListener {
 
 	private HorizontalScrollView mTypeScrollView;
 	private HorizontalScrollView mCategoryScrollView;
@@ -38,6 +41,7 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 	private ListView mCurrentListView;
 	private Handler mHandler;
 	private SlidingMenu mSlidingMenu;
+	private LinkedList<DocCategory> mCategoryHolder = new LinkedList<DocCategory>();
 
 	/*
 	 * (non-Javadoc)
@@ -77,15 +81,21 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 				case 0:
 					List<DocType> list = (List<DocType>) msg.obj;
 					bindMenu(list);
-					buildViewPager(list.get(0).getChildrenList());
-					// build article list with default first one
-					queryList(list.get(0).getChildrenList().get(0));
+					// build subMenu/viewPager with default first one
+					refreshCategoryHolder(list.get(0).getChildrenList());
+					bindSubmenu();
+					buildViewPager();
 					break;
 				case 1:
 					List<Article> list2 = (List<Article>) msg.obj;
 					bindList(list2);
 					break;
-
+				case 2:
+					List<DocCategory> list3 = (List<DocCategory>) msg.obj;
+					refreshCategoryHolder(list3);
+					bindSubmenu();
+					buildViewPager();
+					break;
 				default:
 					break;
 				}
@@ -112,34 +122,67 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 
 	private void bindMenu(List<DocType> list) {
 		LinearLayout layout = (LinearLayout) mTypeScrollView.getChildAt(0);
+		layout.removeAllViews(); // clear first
 		for (DocType docType : list) {
 			TextView textView = new TextView(mContext);
 			textView.setText(docType.getTitle());
-			textView.setHeight(50);
-			textView.setWidth(50);
-			layout.addView(textView);
-		}
-		// build submenu with default first one
-		layout = (LinearLayout) mCategoryScrollView.getChildAt(0);
-		for (DocType docType : list) {
-			TextView textView = new TextView(mContext);
-			textView.setText(docType.getTitle());
-			textView.setHeight(50);
-			textView.setWidth(50);
+			textView.setTextSize(20);
+			textView.setHeight(150);
+			textView.setWidth(150);
+			textView.setBackgroundColor(Color.RED);
+			textView.setTag(docType.getChildrenList());
+			textView.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					Message message = mHandler.obtainMessage(2, v.getTag());
+					mHandler.sendMessage(message);
+				}
+			});
 			layout.addView(textView);
 		}
 	}
 
-	private void buildViewPager(List<DocCategory> list) {
+	private void refreshCategoryHolder(List<DocCategory> list) {
+		mCategoryHolder.clear();
+		mCategoryHolder.addAll(list);
+	}
+
+	private void bindSubmenu() {
+		LinearLayout layout = (LinearLayout) mCategoryScrollView.getChildAt(0);
+		layout.removeAllViews(); // clear first
+		for (int i = 0; i < mCategoryHolder.size(); i++) {
+			DocCategory category = mCategoryHolder.get(i);
+			TextView textView = new TextView(mContext);
+			textView.setText(category.getTitle());
+			textView.setTextSize(20);
+			textView.setHeight(150);
+			textView.setWidth(150);
+			textView.setBackgroundColor(Color.RED);
+			textView.setTag(i);
+			textView.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					mViewPager.setCurrentItem(Integer.valueOf(String.valueOf(v
+							.getTag())));
+				}
+			});
+			layout.addView(textView);
+		}
+	}
+
+	private void buildViewPager() {
 		List<View> viewlist = new ArrayList<View>();
-		for (DocCategory category : list) {
+		for (int i = 0; i < mCategoryHolder.size(); i++) {
 			ListView listView = new ListView(mContext);
-			listView.setTag(category);
 			viewlist.add(listView);
 		}
 		mViewPager.setAdapter(new MyPagerAdapter(viewlist));
 		mViewPager.setCurrentItem(0);
 		mViewPager.setOnPageChangeListener(this);
+		// build article list with default first one
+		// queryList(list.get(0));
 	}
 
 	private void bindList(List<Article> list) {
@@ -164,13 +207,19 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 		mCurrentListView = (ListView) ((MyPagerAdapter) mViewPager.getAdapter())
 				.getViewByPosition(arg0);
 		// do binding
-		DocCategory category = (DocCategory) mCurrentListView.getTag();
+		DocCategory category = mCategoryHolder.get(arg0);
 		queryList(category);
 	}
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onClick(View v) {
 		// TODO Auto-generated method stub
 
 	}
