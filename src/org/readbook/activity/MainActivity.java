@@ -115,6 +115,8 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 		for (DocType docType : list) {
 			TextView textView = new TextView(mContext);
 			textView.setText(docType.getTitle());
+			textView.setHeight(50);
+			textView.setWidth(50);
 			layout.addView(textView);
 		}
 		// build submenu with default first one
@@ -122,6 +124,8 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 		for (DocType docType : list) {
 			TextView textView = new TextView(mContext);
 			textView.setText(docType.getTitle());
+			textView.setHeight(50);
+			textView.setWidth(50);
 			layout.addView(textView);
 		}
 	}
