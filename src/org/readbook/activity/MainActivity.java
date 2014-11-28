@@ -112,7 +112,7 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 		// configure the SlidingMenu
 		mSlidingMenu = new SlidingMenu(mContext);
 		mSlidingMenu.setMode(SlidingMenu.RIGHT);
-		mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 		mSlidingMenu.setShadowWidthRes(R.dimen.shadow_width);
 		mSlidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
 		mSlidingMenu.setFadeDegree(0.35f);
@@ -179,10 +179,9 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 			viewlist.add(listView);
 		}
 		mViewPager.setAdapter(new MyPagerAdapter(viewlist));
-		mViewPager.setCurrentItem(0);
 		mViewPager.setOnPageChangeListener(this);
-		// build article list with default first one
-		// queryList(list.get(0));
+		mViewPager.setCurrentItem(1);
+		mViewPager.setCurrentItem(0);
 	}
 
 	private void bindList(List<Article> list) {
