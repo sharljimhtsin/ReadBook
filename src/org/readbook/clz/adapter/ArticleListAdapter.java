@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.readbook.R;
 import org.readbook.entity.Article;
+import org.readbook.res.Constants;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -81,13 +82,13 @@ public class ArticleListAdapter extends BaseAdapter {
 			viewHolder = new ViewHolder();
 			viewHolder.name = (TextView) convertView
 					.findViewById(R.id.textView_article_type_list_title);
-			convertView.setTag(viewHolder);
+			convertView.setTag(Constants.TAG_VIEW, viewHolder);
 		} else {
-			viewHolder = (ViewHolder) convertView.getTag();
+			viewHolder = (ViewHolder) convertView.getTag(Constants.TAG_VIEW);
 		}
 		Article article = mList.get(position);
 		viewHolder.name.setText(article.getTitle());
-		viewHolder.name.setTag(article.getUrl());
+		viewHolder.name.setTag(Constants.TAG_DATA, article.getUrl());
 		return convertView;
 	}
 
