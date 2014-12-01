@@ -1,6 +1,8 @@
 package org.readbook.task;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.readbook.clz.MyApplication;
@@ -26,6 +28,7 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 	protected BaseRequest request;
 	protected Map<String, Object> map;
 	protected HttpHelper httpHelper;
+	protected List<String> skip;
 
 	public BaseTask(BaseRequest request, Handler handler) {
 		this.request = request;
@@ -39,10 +42,9 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 	protected void setRequestParams() {
 		MyApplication application = MyApplication.getInstance();
 		// basic fields
-		int client = 2;
-		String identifer = "";
+		int client = 2; // for Android
+		String identifer = application.getPhoneIMEI();
 		String jpushId = "";
-		String imei = application.getPhoneIMEI();
 		String osVersion = application.getOSVersion();
 		String device_name = application.getDeviceName();
 		String device_brand = application.getDeviceBrand();
@@ -67,7 +69,6 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 		map.put("client", client);
 		map.put("identifer", identifer);
 		map.put("jpushId", jpushId);
-		map.put("imei", imei);
 		map.put("osVersion", osVersion);
 		map.put("device_name", device_name);
 		map.put("device_brand", device_brand);
@@ -87,9 +88,26 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 		map.put("articleId", articleId);
 		map.put("verify", key);
 
+		skip = new ArrayList<String>();
+		skip.add("device_name");
+		skip.add("device_brand");
+		skip.add("area");
+		skip.add("deviceID");
+		skip.add("phoneNumber");
+		skip.add("qq");
+		skip.add("name");
+		skip.add("email");
+		skip.add("sex");
+		skip.add("age");
+		skip.add("docTypeId");
+		skip.add("docCategoryId");
+
 		String verifyString = "";
-		for (Object s : map.values()) {
-			verifyString += String.valueOf(s);
+		for (String key : map.keySet()) {
+			if (skip.contains(key)) {
+				continue;
+			}
+			verifyString += String.valueOf(map.get(key));
 		}
 		String verify = MD5.encode(verifyString);
 		map.put("verify", verify);
