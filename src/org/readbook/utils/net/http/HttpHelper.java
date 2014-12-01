@@ -270,6 +270,8 @@ public class HttpHelper {
 			if (p != null) {
 				if (p instanceof String) {
 					nvps.add(new BasicNameValuePair(key, p.toString()));
+				} else if (p instanceof Integer) {
+					nvps.add(new BasicNameValuePair(key, p.toString()));
 				} else {
 					@SuppressWarnings("unchecked")
 					List<String> l = (List<String>) p;
