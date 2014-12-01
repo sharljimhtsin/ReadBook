@@ -78,7 +78,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity" >
+        <activity android:name=".activity.MainActivity" android:screenOrientation="portrait">
         </activity>
         <activity android:name=".activity.ArticleTypeListActivity" >
         </activity>
