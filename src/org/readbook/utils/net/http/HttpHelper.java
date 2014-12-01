@@ -71,6 +71,7 @@ public class HttpHelper {
 	private static final int TIME_OUT = 30 * 1000;
 	private static HttpHelper instance = null;
 	private Proxy mProxy = null;
+	private Map<String, String> mHeaders;
 
 	public static HttpHelper getInstance() {
 		if (instance == null) {
@@ -82,6 +83,12 @@ public class HttpHelper {
 	}
 
 	public HttpHelper() {
+		mHeaders = null;
+		this.initHttpClient();
+	}
+
+	public HttpHelper(Map<String, String> para) {
+		mHeaders = para;
 		this.initHttpClient();
 	}
 
@@ -339,6 +346,11 @@ public class HttpHelper {
 		List<BasicHeader> headers = new ArrayList<BasicHeader>();
 		headers.add(new BasicHeader("Accept", "*/*"));
 		headers.add(new BasicHeader("Accept-Encoding", "gzip"));
+		if (mHeaders != null) {
+			for (String key : mHeaders.keySet()) {
+				headers.add(new BasicHeader(key, mHeaders.get(key)));
+			}
+		}
 
 		// headers.add(new BasicHeader("Content-type",
 		// "application/x-www-form-urlencoded"));

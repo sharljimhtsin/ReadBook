@@ -1,5 +1,6 @@
 package org.readbook.task;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -37,7 +38,6 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 	 * 
 	 */
 	protected void setRequestParams() {
-		httpHelper = new HttpHelper();
 		MyApplication application = MyApplication.getInstance();
 		// basic fields
 		String imei = application.getPhoneIMEI();
@@ -80,14 +80,16 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 		map.put("docTypeId", docTypeId);
 		map.put("docCategoryId", docCategoryId);
 		map.put("articleId", articleId);
-		map.put("verify", key);
 
 		String verifyString = "";
 		for (Object s : map.values()) {
 			verifyString += String.valueOf(s);
 		}
 		String verify = MD5.encode(verifyString);
-		map.put("verify", verify);
+		// put verify string into header
+		Map<String, String> verMap = new HashMap<String, String>();
+		verMap.put("verify", verify);
+		httpHelper = new HttpHelper(verMap);
 		LogUtil.logD(LogUtil.TAG, "------ BaseRequest -------" + map.toString());
 	}
 
