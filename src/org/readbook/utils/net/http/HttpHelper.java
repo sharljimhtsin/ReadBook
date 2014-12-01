@@ -71,7 +71,7 @@ public class HttpHelper {
 	private static final int TIME_OUT = 30 * 1000;
 	private static HttpHelper instance = null;
 	private Proxy mProxy = null;
-	private Map<String, String> mHeaders;
+	private Map<String, Object> mHeaders;
 
 	public static HttpHelper getInstance() {
 		if (instance == null) {
@@ -87,7 +87,7 @@ public class HttpHelper {
 		this.initHttpClient();
 	}
 
-	public HttpHelper(Map<String, String> para) {
+	public HttpHelper(Map<String, Object> para) {
 		mHeaders = para;
 		this.initHttpClient();
 	}
@@ -258,6 +258,13 @@ public class HttpHelper {
 		return this.httpExecute(post);
 
 	}
+	
+	public String httpPost(String url) throws ParseException, IOException {
+		HttpPost post = new HttpPost(this.getURL(url));
+		post.addHeader("content-type", "application/x-www-form-urlencoded");
+		// post.addHeader("content-type","application/json");
+		return this.httpExecute(post);
+	}
 
 	public String httpPost(String url, Map<String, ?> map)
 			throws ParseException, IOException {
@@ -350,7 +357,8 @@ public class HttpHelper {
 		headers.add(new BasicHeader("Accept-Encoding", "gzip"));
 		if (mHeaders != null) {
 			for (String key : mHeaders.keySet()) {
-				headers.add(new BasicHeader(key, mHeaders.get(key)));
+				headers.add(new BasicHeader(key, String.valueOf(mHeaders
+						.get(key))));
 			}
 		}
 
