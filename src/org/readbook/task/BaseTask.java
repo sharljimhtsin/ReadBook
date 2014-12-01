@@ -1,6 +1,5 @@
 package org.readbook.task;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -22,7 +21,7 @@ import android.os.Handler;
  */
 public class BaseTask extends AsyncTask<Void, Void, Void> {
 
-	private final static String key = "abcd";
+	private final static String key = "diaozatian_luomiou_xiie";
 	protected Handler handler;
 	protected BaseRequest request;
 	protected Map<String, Object> map;
@@ -40,14 +39,17 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 	protected void setRequestParams() {
 		MyApplication application = MyApplication.getInstance();
 		// basic fields
+		int client = 2;
+		String identifer = "";
+		String jpushId = "";
 		String imei = application.getPhoneIMEI();
-		String os_version = application.getOSVersion();
+		String osVersion = application.getOSVersion();
 		String device_name = application.getDeviceName();
 		String device_brand = application.getDeviceBrand();
 		String province = application.getLocationProvince();
 		String city = application.getLocationCity();
 		String area = application.getLocationArea();
-		String appversion = application.getVersion();
+		String appVersion = application.getVersion();
 		// extend fields
 		String deviceID = request.getDeviceID();
 		String phoneNumber = request.getPhoneNumber();
@@ -62,14 +64,17 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 		int articleId = request.getArticleId();
 
 		map = new LinkedHashMap<String, Object>();
+		map.put("client", client);
+		map.put("identifer", identifer);
+		map.put("jpushId", jpushId);
 		map.put("imei", imei);
-		map.put("os_version", os_version);
+		map.put("osVersion", osVersion);
 		map.put("device_name", device_name);
 		map.put("device_brand", device_brand);
 		map.put("province", province);
 		map.put("city", city);
 		map.put("area", area);
-		map.put("appversion", appversion);
+		map.put("appVersion", appVersion);
 		map.put("deviceID", deviceID);
 		map.put("phoneNumber", phoneNumber);
 		map.put("qq", qq);
@@ -80,16 +85,15 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 		map.put("docTypeId", docTypeId);
 		map.put("docCategoryId", docCategoryId);
 		map.put("articleId", articleId);
+		map.put("verify", key);
 
 		String verifyString = "";
 		for (Object s : map.values()) {
 			verifyString += String.valueOf(s);
 		}
 		String verify = MD5.encode(verifyString);
-		// put verify string into header
-		Map<String, String> verMap = new HashMap<String, String>();
-		verMap.put("verify", verify);
-		httpHelper = new HttpHelper(verMap);
+		map.put("verify", verify);
+		httpHelper = new HttpHelper(map);
 		LogUtil.logD(LogUtil.TAG, "------ BaseRequest -------" + map.toString());
 	}
 
