@@ -21,11 +21,13 @@ public class Constants {
 		// Task
 		public final static String getAvailable = host
 				+ "/Home/Task/getAvailable";
+		public final static String test = "http://192.168.0.33:8083/Home/Device/android";
 	}
 
 	public static final class ShareRefrence {
 		public final static String SHAREREFRENCE_NAME = "readbook";
-		// /
+		public final static String jid = "jid";
+		//
 		public final static String shareText = "shareText";
 		public final static String shareUrl = "shareUrl";
 

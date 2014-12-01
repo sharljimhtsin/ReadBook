@@ -11,9 +11,11 @@ import org.readbook.entity.Article;
 import org.readbook.entity.BaseRequest;
 import org.readbook.entity.DocCategory;
 import org.readbook.entity.DocType;
+import org.readbook.res.Constants;
 import org.readbook.task.ArticleListTask;
 import org.readbook.task.ArticleTypeListTask;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -213,8 +215,10 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		// TODO Auto-generated method stub
-
+		String url = String.valueOf(view.getTag(Constants.TAG_DATA));
+		Intent intent = new Intent(mContext, ArticleContentActivity.class);
+		intent.putExtra("url", url);
+		startActivity(intent);
 	}
 
 	@Override

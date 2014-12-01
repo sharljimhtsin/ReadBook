@@ -11,7 +11,9 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -19,6 +21,7 @@ import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.widget.Toast;
+import cn.jpush.android.api.JPushInterface;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -41,6 +44,7 @@ public class MyApplication extends Application {
 	private String locationProvince = "";
 	private String locationCity = "";
 	private String locationArea = "";
+	private String jPushId = "";
 
 	@Override
 	public void onCreate() {
@@ -51,6 +55,10 @@ public class MyApplication extends Application {
 				Context.MODE_PRIVATE);
 		SdcardManager.prepare();
 		initImageLoader(this);
+		// initial JPush
+		JPushInterface.setDebugMode(true);
+		JPushInterface.init(instance);
+		// initial Baidu LBS
 		mLocationClient = new LocationClient(this.getApplicationContext());
 		mMyLocationListener = new MyLocationListener();
 		mLocationClient.registerLocationListener(mMyLocationListener);
@@ -183,6 +191,18 @@ public class MyApplication extends Application {
 		return version;
 	}
 
+	public String getQudao() {
+		try {
+			ApplicationInfo info = getPackageManager().getApplicationInfo(
+					getPackageName(), PackageManager.GET_META_DATA);
+			return info.metaData.getString("QUDAO", "");
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
+		return "";
+
+	}
+
 	/**
 	 * Retrieves application's version code from the manifest
 	 * 
@@ -287,6 +307,27 @@ public class MyApplication extends Application {
 		option.setScanSpan(100000);// 设置发起定位请求的间隔时间为5000ms
 		option.setIsNeedAddress(true);
 		mLocationClient.setLocOption(option);
+	}
+
+	/**
+	 * @return the jPushId
+	 */
+	public String getjPushId() {
+		if (TextUtils.isEmpty(jPushId)) {
+			return sharedPreferences.getString(Constants.ShareRefrence.jid, "");
+		}
+		return jPushId;
+	}
+
+	/**
+	 * @param jPushId
+	 *            the jPushId to set
+	 */
+	public void setjPushId(String jPushId) {
+		this.jPushId = jPushId;
+		Editor editor = sharedPreferences.edit();
+		editor.putString(Constants.ShareRefrence.jid, this.jPushId);
+		editor.commit();
 	}
 
 }

@@ -44,14 +44,15 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 		// basic fields
 		int client = 2; // for Android
 		String identifer = application.getPhoneIMEI();
-		String jpushId = "";
+		String jpushId = application.getjPushId();
 		String osVersion = application.getOSVersion();
-		String device_name = application.getDeviceName();
-		String device_brand = application.getDeviceBrand();
+		String deviceName = application.getDeviceName();
+		String deviceBrand = application.getDeviceBrand();
 		String province = application.getLocationProvince();
 		String city = application.getLocationCity();
 		String area = application.getLocationArea();
 		String appVersion = application.getVersion();
+		String qudao = application.getQudao();
 		// extend fields
 		String deviceID = request.getDeviceID();
 		String phoneNumber = request.getPhoneNumber();
@@ -70,12 +71,13 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 		map.put("identifer", identifer);
 		map.put("jpushId", jpushId);
 		map.put("osVersion", osVersion);
-		map.put("device_name", device_name);
-		map.put("device_brand", device_brand);
+		map.put("deviceName", deviceName);
+		map.put("deviceBrand", deviceBrand);
 		map.put("province", province);
 		map.put("city", city);
 		map.put("area", area);
 		map.put("appVersion", appVersion);
+		map.put("qudao", qudao);
 		map.put("deviceID", deviceID);
 		map.put("phoneNumber", phoneNumber);
 		map.put("qq", qq);
@@ -89,8 +91,9 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 		map.put("verify", key);
 
 		skip = new ArrayList<String>();
-		skip.add("device_name");
-		skip.add("device_brand");
+		skip.add("deviceName");
+		skip.add("deviceBrand");
+		skip.add("qudao");
 		skip.add("area");
 		skip.add("deviceID");
 		skip.add("phoneNumber");
