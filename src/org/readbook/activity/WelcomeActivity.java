@@ -10,15 +10,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import cn.jpush.android.api.JPushInterface;
 
 public class WelcomeActivity extends BaseActivity {
-	
+
 	private long startMills;
-	
+
 	@SuppressLint("HandlerLeak")
-	private Handler handler = new Handler(){
+	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
-			if(isFinishing()){
+			if (isFinishing()) {
 				removeCallbacksAndMessages(null);
 				return;
 			}
@@ -26,18 +27,20 @@ public class WelcomeActivity extends BaseActivity {
 			case 0:
 				long endMills = System.currentTimeMillis();
 				long diff = endMills - startMills;
-				if(diff > 2000){
+				if (diff > 2000) {
 					handler.sendEmptyMessage(1);
-				}else{
-					handler.sendEmptyMessageDelayed(1, 2000-diff);
+				} else {
+					handler.sendEmptyMessageDelayed(1, 2000 - diff);
 				}
 				break;
 			case 1:
-				startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+				startActivity(new Intent(WelcomeActivity.this,
+						MainActivity.class));
 				finish();
 				break;
 			case -1:
-				MyApplication.getInstance().showToast(WelcomeActivity.this, (String) msg.obj);
+				MyApplication.getInstance().showToast(WelcomeActivity.this,
+						(String) msg.obj);
 				handler.sendEmptyMessageDelayed(2, 2000);
 				break;
 			case 2:
@@ -57,14 +60,16 @@ public class WelcomeActivity extends BaseActivity {
 		indexTask.execute();
 		startMills = System.currentTimeMillis();
 	}
-	
+
 	@Override
 	public void onResume() {
 		super.onResume();
+		JPushInterface.onResume(mContext);
 	}
-	
+
 	@Override
 	public void onPause() {
 		super.onPause();
+		JPushInterface.onPause(mContext);
 	}
 }

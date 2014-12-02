@@ -1,13 +1,10 @@
 package org.readbook.clz;
 
 import org.readbook.activity.WelcomeActivity;
-import org.readbook.entity.BaseRequest;
-import org.readbook.res.Constants;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.util.Log;
 import cn.jpush.android.api.JPushInterface;
