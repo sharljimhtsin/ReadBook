@@ -1,13 +1,10 @@
 package org.readbook.task;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONObject;
 import org.readbook.entity.BaseRequest;
-import org.readbook.entity.DocCategory;
 import org.readbook.entity.DocType;
-import org.readbook.entity.Response;
 import org.readbook.res.Constants;
 import org.readbook.utils.LogUtil;
 
@@ -15,7 +12,6 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 /**
@@ -31,41 +27,8 @@ public class ArticleTypeListTask extends BaseTask {
 	@Override
 	protected Void doInBackground(Void... params) {
 		try {
-			// setRequestParams();
-			// String resultJson = httpHelper.httpGet(Constants.Host.index,
-			// super.map);
-
-			// build json string for test START
-			GsonBuilder gsonBuilder = new GsonBuilder();
-			Gson g = gsonBuilder.create();
-			DocCategory docCategory = new DocCategory(1, "xxxxxxxx",
-					"xxxxxxxx", "xxxxxxxx", 1, 1);
-			List<DocCategory> l = new ArrayList<DocCategory>();
-			List<DocCategory> lepy = new ArrayList<DocCategory>();
-			l.add(docCategory);
-			l.add(docCategory);
-			l.add(docCategory);
-			l.add(docCategory);
-			l.add(docCategory);
-			l.add(docCategory);
-			l.add(docCategory);
-			DocType docType = new DocType(11, "aaaaaaaa", "bbbbbb", "cccccccc",
-					1, 2, l);
-			DocType docTypeepy = new DocType(11, "aaaaaaaa", "bbbbbb",
-					"cccccccc", 1, 2, lepy);
-			List<DocType> ll = new ArrayList<DocType>();
-			ll.add(docType);
-			ll.add(docType);
-			ll.add(docType);
-			ll.add(docType);
-			ll.add(docType);
-			ll.add(docType);
-			ll.add(docType);
-			ll.add(docTypeepy);
-			Response response = new Response(1, ll);
-			String resultJson = g.toJson(response);
-			// build json string for test END
-
+			setRequestParams();
+			String resultJson = httpHelper.httpGet(Constants.Host.typeList);
 			LogUtil.logD(LogUtil.TAG,
 					"------ArticleTypeListTask receiver-------" + resultJson);
 			JSONObject dataObject = new JSONObject(resultJson);
@@ -86,7 +49,6 @@ public class ArticleTypeListTask extends BaseTask {
 					msg.what = -1;
 					handler.sendMessage(msg);
 				}
-
 			} else {
 				Message msg = handler.obtainMessage();
 				msg.obj = "set null";

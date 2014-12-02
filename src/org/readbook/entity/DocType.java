@@ -11,13 +11,13 @@ import java.util.List;
  */
 
 public class DocType {
-	private int id;
-	private String title;
+	private int class_id;
+	private String class_name;
 	private String subTitle;
 	private String url;
 	private int totalCount;
 	private int childrenNode;
-	private List<DocCategory> childrenList;
+	private List<DocCategory> sub_class;
 
 	/**
 	 * @param id
@@ -31,20 +31,20 @@ public class DocType {
 	public DocType(int id, String title, String subTitle, String url,
 			int totalCount, int childrenNode, List<DocCategory> childrenList) {
 		super();
-		this.id = id;
-		this.title = title;
+		this.class_id = id;
+		this.class_name = title;
 		this.subTitle = subTitle;
 		this.url = url;
 		this.totalCount = totalCount;
 		this.childrenNode = childrenNode;
-		this.childrenList = childrenList;
+		this.sub_class = childrenList;
 	}
 
 	/**
 	 * @return the title
 	 */
 	public String getTitle() {
-		return title;
+		return class_name;
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class DocType {
 	 *            the title to set
 	 */
 	public void setTitle(String title) {
-		this.title = title;
+		this.class_name = title;
 	}
 
 	/**
@@ -119,7 +119,7 @@ public class DocType {
 	 * @return the id
 	 */
 	public int getId() {
-		return id;
+		return class_id;
 	}
 
 	/**
@@ -127,14 +127,14 @@ public class DocType {
 	 *            the id to set
 	 */
 	public void setId(int id) {
-		this.id = id;
+		this.class_id = id;
 	}
 
 	/**
 	 * @return the childrenList
 	 */
 	public List<DocCategory> getChildrenList() {
-		return childrenList;
+		return sub_class;
 	}
 
 	/**
@@ -142,7 +142,6 @@ public class DocType {
 	 *            the childrenList to set
 	 */
 	public void setChildrenList(List<DocCategory> childrenList) {
-		this.childrenList = childrenList;
+		this.sub_class = childrenList;
 	}
-
 }

@@ -9,8 +9,8 @@ package org.readbook.entity;
  */
 
 public class DocCategory {
-	private int id;
-	private String title;
+	private int class_id;
+	private String class_name;
 	private String subTitle;
 	private String url;
 	private int totalCount;
@@ -27,8 +27,8 @@ public class DocCategory {
 	public DocCategory(int id, String title, String subTitle, String url,
 			int totalCount, int parentType) {
 		super();
-		this.id = id;
-		this.title = title;
+		this.class_id = id;
+		this.class_name = title;
 		this.subTitle = subTitle;
 		this.url = url;
 		this.totalCount = totalCount;
@@ -39,7 +39,7 @@ public class DocCategory {
 	 * @return the title
 	 */
 	public String getTitle() {
-		return title;
+		return class_name;
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class DocCategory {
 	 *            the title to set
 	 */
 	public void setTitle(String title) {
-		this.title = title;
+		this.class_name = title;
 	}
 
 	/**
@@ -114,7 +114,7 @@ public class DocCategory {
 	 * @return the id
 	 */
 	public int getId() {
-		return id;
+		return class_id;
 	}
 
 	/**
@@ -122,7 +122,6 @@ public class DocCategory {
 	 *            the id to set
 	 */
 	public void setId(int id) {
-		this.id = id;
+		this.class_id = id;
 	}
-
 }

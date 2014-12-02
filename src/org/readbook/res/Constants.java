@@ -15,13 +15,15 @@ public class Constants {
 	public static int TAG_DATA = R.string.tag_data;
 
 	public static final class Host {
-		public final static String host = "http://42.121.137.60:44778";
+		public final static String host = "http://192.168.0.33:8083";
 		// Index
 		public final static String index = host + "/Home/Index/index";
 		// Task
 		public final static String getAvailable = host
 				+ "/Home/Task/getAvailable";
-		public final static String test = "http://192.168.0.33:8083/Home/Device/android";
+		public final static String test = host + "/Home/Device/android";
+
+		public final static String typeList = host + "/Home/Article/classInfo";
 	}
 
 	public static final class ShareRefrence {
