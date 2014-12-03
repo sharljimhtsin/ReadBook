@@ -17,7 +17,7 @@ public class RegUserInfoTask extends BaseTask {
 	}
 
 	@Override
-	protected Void doInBackground(Void... params) {
+	protected Void doInBackground(String... params) {
 		try {
 			// User user = new User();
 			// user.setAge(super.request.getAge());

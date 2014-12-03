@@ -17,7 +17,7 @@ public class ModUserInfoTask extends BaseTask {
 	}
 
 	@Override
-	protected Void doInBackground(Void... params) {
+	protected Void doInBackground(String... params) {
 		try {
 			// User user = User.getCurrentUser(User.class);
 			// user.setMobilePhoneNumber(super.request.getPhoneNumber());

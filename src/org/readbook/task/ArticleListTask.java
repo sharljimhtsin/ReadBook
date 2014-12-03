@@ -25,7 +25,7 @@ public class ArticleListTask extends BaseTask {
 	}
 
 	@Override
-	protected Void doInBackground(Void... params) {
+	protected Void doInBackground(String... params) {
 		try {
 			setRequestParams();
 			String resultJson = httpHelper.httpGet(Constants.Host.articleList);
@@ -40,7 +40,13 @@ public class ArticleListTask extends BaseTask {
 						}.getType());
 				if (list.size() > 0) {
 					Message msg = new Message();
-					msg.what = 1;
+					if ("0".equals(params[0])) {
+						msg.what = 1;
+					} else if ("1".equals(params[0])) {
+						msg.what = 3;
+					} else {
+						msg.what = 4;
+					}
 					msg.obj = list;
 					handler.sendMessage(msg);
 				} else {

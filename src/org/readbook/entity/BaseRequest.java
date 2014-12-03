@@ -21,6 +21,7 @@ public class BaseRequest {
 	// article parameters
 	private int classId = 0; // 段子类型
 	private int articleId = 0; // 段子id
+	private String endTime = "";
 
 	/**
 	 * @return the deviceID
@@ -200,5 +201,20 @@ public class BaseRequest {
 	 */
 	public void setArticleId(int articleId) {
 		this.articleId = articleId;
+	}
+
+	/**
+	 * @return the endTime
+	 */
+	public String getEndTime() {
+		return endTime;
+	}
+
+	/**
+	 * @param endTime
+	 *            the endTime to set
+	 */
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
 	}
 }

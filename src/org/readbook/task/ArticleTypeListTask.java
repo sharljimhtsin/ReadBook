@@ -25,7 +25,7 @@ public class ArticleTypeListTask extends BaseTask {
 	}
 
 	@Override
-	protected Void doInBackground(Void... params) {
+	protected Void doInBackground(String... params) {
 		try {
 			setRequestParams();
 			String resultJson = httpHelper.httpGet(Constants.Host.typeList);

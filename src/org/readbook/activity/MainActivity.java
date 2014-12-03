@@ -32,15 +32,19 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.costum.android.widget.PullAndLoadListView;
+import com.costum.android.widget.PullAndLoadListView.OnLoadMoreListener;
+import com.costum.android.widget.PullToRefreshListView.OnRefreshListener;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 public class MainActivity extends BaseActivity implements OnPageChangeListener,
-		OnItemClickListener, OnClickListener {
+		OnItemClickListener, OnClickListener, OnRefreshListener,
+		OnLoadMoreListener {
 
 	private HorizontalScrollView mTypeScrollView;
 	private HorizontalScrollView mCategoryScrollView;
 	private ViewPager mViewPager;
-	private ListView mCurrentListView;
+	private PullAndLoadListView mCurrentListView;
 	private Handler mHandler;
 	private SlidingMenu mSlidingMenu;
 	private LinkedList<DocCategory> mCategoryHolder = new LinkedList<DocCategory>();
@@ -64,11 +68,39 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 		task.execute();
 	}
 
-	private void queryList(DocCategory category) {
+	/**
+	 * @author Administrator
+	 *
+	 */
+	private enum Method {
+		Initial, LoadMore, Refresh
+	}
+
+	/**
+	 * @param category
+	 * @param method
+	 *            0 for initial,1 for load more,2 for refresh
+	 */
+	private void queryList(DocCategory category, Method method) {
 		BaseRequest request = new BaseRequest();
 		request.setDocCategoryId(category.getId());
 		ArticleListTask task = new ArticleListTask(request, mHandler);
-		task.execute();
+		switch (method) {
+		case Initial:
+			task.execute("0");
+			break;
+		case LoadMore:
+			Article article = ((ArticleListAdapter) mCurrentListView
+					.getAdapter()).getLastest();
+			request.setEndTime(article.getCreateTime());
+			task.execute("1");
+			break;
+		case Refresh:
+			task.execute("2");
+			break;
+		default:
+			break;
+		}
 	}
 
 	private void prepareHandler() {
@@ -97,6 +129,14 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 					refreshCategoryHolder(list3);
 					bindSubmenu();
 					buildViewPager();
+					break;
+				case 3:
+					List<Article> list4 = (List<Article>) msg.obj;
+					doLoadMore(list4);
+					break;
+				case 4:
+					List<Article> list5 = (List<Article>) msg.obj;
+					doRefresh(list5);
 					break;
 				default:
 					break;
@@ -189,6 +229,8 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 	private void bindList(List<Article> list) {
 		mCurrentListView.setAdapter(new ArticleListAdapter(mContext, list));
 		mCurrentListView.setOnItemClickListener(this);
+		mCurrentListView.setOnRefreshListener(this);
+		mCurrentListView.setOnLoadMoreListener(this);
 	}
 
 	@Override
@@ -205,11 +247,11 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 
 	@Override
 	public void onPageSelected(int arg0) {
-		mCurrentListView = (ListView) ((MyPagerAdapter) mViewPager.getAdapter())
-				.getViewByPosition(arg0);
+		mCurrentListView = (PullAndLoadListView) ((MyPagerAdapter) mViewPager
+				.getAdapter()).getViewByPosition(arg0);
 		// do binding
 		DocCategory category = mCategoryHolder.get(arg0);
-		queryList(category);
+		queryList(category, Method.Initial);
 	}
 
 	@Override
@@ -225,5 +267,33 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void onRefresh() {
+		DocCategory category = mCategoryHolder.get(mViewPager.getCurrentItem());
+		queryList(category, Method.Refresh);
+	}
+
+	private void doRefresh(List<Article> list) {
+		ArticleListAdapter adapter = (ArticleListAdapter) mCurrentListView
+				.getAdapter();
+		adapter.resetItems(list);
+		adapter.notifyDataSetChanged();
+		mCurrentListView.onRefreshComplete();
+	}
+
+	@Override
+	public void onLoadMore() {
+		DocCategory category = mCategoryHolder.get(mViewPager.getCurrentItem());
+		queryList(category, Method.LoadMore);
+	}
+
+	private void doLoadMore(List<Article> list) {
+		ArticleListAdapter adapter = (ArticleListAdapter) mCurrentListView
+				.getAdapter();
+		adapter.appendItems(list);
+		adapter.notifyDataSetChanged();
+		mCurrentListView.onLoadMoreComplete();
 	}
 }

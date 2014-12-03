@@ -26,6 +26,19 @@ public class ArticleListAdapter extends BaseAdapter {
 	private LayoutInflater mInflater;
 	private List<Article> mList;
 
+	public void resetItems(List<Article> list) {
+		mList.clear();
+		mList.addAll(list);
+	}
+
+	public void appendItems(List<Article> list) {
+		mList.addAll(list);
+	}
+
+	public Article getLastest() {
+		return mList.get(mList.size() - 1);
+	}
+
 	/**
 	 * @param mContext
 	 * @param mList

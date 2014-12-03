@@ -21,7 +21,7 @@ import android.os.Handler;
  * @modify_by Administrator at 2014年11月10日 下午2:37:52
  * 
  */
-public class BaseTask extends AsyncTask<Void, Void, Void> {
+public class BaseTask extends AsyncTask<String, Void, Void> {
 
 	private final static String key = "diaozatian_luomiou_xiie";
 	protected Handler handler;
@@ -64,6 +64,7 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 		int age = request.getAge();
 		int articleId = request.getArticleId();
 		int classId = request.getDocCategoryId();
+		String endTime = request.getEndTime();
 
 		map = new LinkedHashMap<String, Object>();
 		map.put("client", client);
@@ -86,6 +87,7 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 		map.put("age", age);
 		map.put("articleId", articleId);
 		map.put("classId", classId);
+		map.put("endTime", endTime);
 		map.put("verify", key);
 
 		skip = new ArrayList<String>();
@@ -115,8 +117,7 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 	}
 
 	@Override
-	protected Void doInBackground(Void... params) {
-		handler.sendMessage(handler.obtainMessage(1));
+	protected Void doInBackground(String... params) {
 		return null;
 	}
 }
