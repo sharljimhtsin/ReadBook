@@ -107,24 +107,22 @@ public class BaseTask extends AsyncTask<String, Void, Void> {
 
 		String verifyString = "";
 		for (String key : map.keySet()) {
-			if (skip.contains(key)) {
-				continue;
+			String tmp = String.valueOf(map.get(key));
+			// check if the parameter should avoid MD5 calculate
+			if (!skip.contains(key)) {
+				verifyString += tmp;
 			}
-			verifyString += String.valueOf(map.get(key));
+			// URLEncode Chinese character in HTTP-Header
+			if (isHanzi(tmp)) {
+				try {
+					map.put(key, URLEncoder.encode(tmp, "UTF-8"));
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		String verify = MD5.encode(verifyString);
 		map.put("verify", verify);
-		// URLEncode Chinese character in HTTP-Header
-		try {
-			for (String key : map.keySet()) {
-				String tmp = String.valueOf(map.get(key));
-				if (isHanzi(tmp)) {
-					map.put(key, URLEncoder.encode(tmp, "UTF-8"));
-				}
-			}
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
 		httpHelper = new HttpHelper(map);
 		LogUtil.logD(LogUtil.TAG, "------ BaseRequest -------" + map.toString());
 	}
