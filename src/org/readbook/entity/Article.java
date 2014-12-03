@@ -11,23 +11,24 @@ import java.util.ArrayList;
  */
 
 public class Article {
-	private int id;
+	private int articleId;
 	private String title;
 	private String subTitle;
-	private String url;
+	private String resource;
 	private String content;
 	private String author;
-	private String createTime;
+	private String postTime;
 	private String lastModify;
-	private int totalRead;
+	private int hits;
 	private int totalComment;
 	private int totalLike;
 	private int totalDislike;
 	private int totalRepost;
-	private int parentType;
+	private int type;
 	private int parentCategory;
-	private ArrayList<String> keyword;
-	private ArrayList<String> pic;
+	private String tag;
+	private int imageCounts;
+	private String imageUrls;
 
 	/**
 	 * @param id
@@ -54,23 +55,21 @@ public class Article {
 			int totalDislike, int totalRepost, int parentType,
 			int parentCategory, ArrayList<String> keyword, ArrayList<String> pic) {
 		super();
-		this.id = id;
+		this.articleId = id;
 		this.title = title;
 		this.subTitle = subTitle;
-		this.url = url;
+		this.resource = url;
 		this.content = content;
 		this.author = author;
-		this.createTime = createTime;
+		this.postTime = createTime;
 		this.lastModify = lastModify;
-		this.totalRead = totalRead;
+		this.hits = totalRead;
 		this.totalComment = totalComment;
 		this.totalLike = totalLike;
 		this.totalDislike = totalDislike;
 		this.totalRepost = totalRepost;
-		this.parentType = parentType;
+		this.type = parentType;
 		this.parentCategory = parentCategory;
-		this.keyword = keyword;
-		this.pic = pic;
 	}
 
 	/**
@@ -107,7 +106,7 @@ public class Article {
 	 * @return the url
 	 */
 	public String getUrl() {
-		return url;
+		return resource;
 	}
 
 	/**
@@ -115,7 +114,7 @@ public class Article {
 	 *            the url to set
 	 */
 	public void setUrl(String url) {
-		this.url = url;
+		this.resource = url;
 	}
 
 	/**
@@ -152,7 +151,7 @@ public class Article {
 	 * @return the createTime
 	 */
 	public String getCreateTime() {
-		return createTime;
+		return postTime;
 	}
 
 	/**
@@ -160,7 +159,7 @@ public class Article {
 	 *            the createTime to set
 	 */
 	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
+		this.postTime = createTime;
 	}
 
 	/**
@@ -182,7 +181,7 @@ public class Article {
 	 * @return the totalRead
 	 */
 	public int getTotalRead() {
-		return totalRead;
+		return hits;
 	}
 
 	/**
@@ -190,7 +189,7 @@ public class Article {
 	 *            the totalRead to set
 	 */
 	public void setTotalRead(int totalRead) {
-		this.totalRead = totalRead;
+		this.hits = totalRead;
 	}
 
 	/**
@@ -257,7 +256,7 @@ public class Article {
 	 * @return the parentType
 	 */
 	public int getParentType() {
-		return parentType;
+		return type;
 	}
 
 	/**
@@ -265,7 +264,7 @@ public class Article {
 	 *            the parentType to set
 	 */
 	public void setParentType(int parentType) {
-		this.parentType = parentType;
+		this.type = parentType;
 	}
 
 	/**
@@ -284,25 +283,10 @@ public class Article {
 	}
 
 	/**
-	 * @return the keyword
-	 */
-	public ArrayList<String> getKeyword() {
-		return keyword;
-	}
-
-	/**
-	 * @param keyword
-	 *            the keyword to set
-	 */
-	public void setKeyword(ArrayList<String> keyword) {
-		this.keyword = keyword;
-	}
-
-	/**
 	 * @return the id
 	 */
 	public int getId() {
-		return id;
+		return articleId;
 	}
 
 	/**
@@ -310,22 +294,52 @@ public class Article {
 	 *            the id to set
 	 */
 	public void setId(int id) {
-		this.id = id;
+		this.articleId = id;
 	}
 
 	/**
-	 * @return the pic
+	 * @return the tag
 	 */
-	public ArrayList<String> getPic() {
-		return pic;
+	public String getTag() {
+		return tag;
 	}
 
 	/**
-	 * @param pic
-	 *            the pic to set
+	 * @param tag
+	 *            the tag to set
 	 */
-	public void setPic(ArrayList<String> pic) {
-		this.pic = pic;
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+
+	/**
+	 * @return the imageCounts
+	 */
+	public int getImageCounts() {
+		return imageCounts;
+	}
+
+	/**
+	 * @param imageCounts
+	 *            the imageCounts to set
+	 */
+	public void setImageCounts(int imageCounts) {
+		this.imageCounts = imageCounts;
+	}
+
+	/**
+	 * @return the imageUrls
+	 */
+	public String getImageUrls() {
+		return imageUrls;
+	}
+
+	/**
+	 * @param imageUrls
+	 *            the imageUrls to set
+	 */
+	public void setImageUrls(String imageUrls) {
+		this.imageUrls = imageUrls;
 	}
 
 }

@@ -62,9 +62,8 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 		// logic fields
 		int sex = request.getSex();
 		int age = request.getAge();
-		int docTypeId = request.getDocTypeId();
-		int docCategoryId = request.getDocCategoryId();
 		int articleId = request.getArticleId();
+		int classId = request.getDocCategoryId();
 
 		map = new LinkedHashMap<String, Object>();
 		map.put("client", client);
@@ -85,9 +84,8 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 		map.put("email", email);
 		map.put("sex", sex);
 		map.put("age", age);
-		map.put("docTypeId", docTypeId);
-		map.put("docCategoryId", docCategoryId);
 		map.put("articleId", articleId);
+		map.put("classId", classId);
 		map.put("verify", key);
 
 		skip = new ArrayList<String>();
@@ -102,8 +100,6 @@ public class BaseTask extends AsyncTask<Void, Void, Void> {
 		skip.add("email");
 		skip.add("sex");
 		skip.add("age");
-		skip.add("docTypeId");
-		skip.add("docCategoryId");
 
 		String verifyString = "";
 		for (String key : map.keySet()) {

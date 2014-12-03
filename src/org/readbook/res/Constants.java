@@ -24,6 +24,9 @@ public class Constants {
 		public final static String test = host + "/Home/Device/android";
 
 		public final static String typeList = host + "/Home/Article/classInfo";
+
+		public final static String articleList = host
+				+ "/Home/Article/showlist";
 	}
 
 	public static final class ShareRefrence {
