@@ -27,6 +27,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.HeaderViewListAdapter;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -89,8 +90,10 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 			task.execute("0");
 			break;
 		case LoadMore:
-			Article article = ((ArticleListAdapter) mCurrentListView
-					.getAdapter()).getLastest();
+			HeaderViewListAdapter adapter = (HeaderViewListAdapter) mCurrentListView
+					.getAdapter();
+			Article article = ((ArticleListAdapter) adapter.getWrappedAdapter())
+					.getLastest();
 			request.setEndTime(article.getCreateTime());
 			task.execute("1");
 			break;
