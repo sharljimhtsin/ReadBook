@@ -29,7 +29,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.costum.android.widget.PullAndLoadListView;
@@ -83,7 +82,7 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 	 */
 	private void queryList(DocCategory category, Method method) {
 		BaseRequest request = new BaseRequest();
-		request.setDocCategoryId(category.getId());
+		request.setDocCategoryId(String.valueOf(category.getId()));
 		ArticleListTask task = new ArticleListTask(request, mHandler);
 		switch (method) {
 		case Initial:
@@ -217,7 +216,7 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 	private void buildViewPager() {
 		List<View> viewlist = new ArrayList<View>();
 		for (int i = 0; i < mCategoryHolder.size(); i++) {
-			ListView listView = new ListView(mContext);
+			PullAndLoadListView listView = new PullAndLoadListView(mContext);
 			viewlist.add(listView);
 		}
 		mViewPager.setAdapter(new MyPagerAdapter(viewlist));

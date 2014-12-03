@@ -1,5 +1,7 @@
 package org.readbook.task;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -23,7 +25,7 @@ import android.os.Handler;
  */
 public class BaseTask extends AsyncTask<String, Void, Void> {
 
-	private final static String key = "diaozatian_luomiou_xiie";
+	private final static String MD5_SALT = "diaozatian_luomiou_xiie";
 	protected Handler handler;
 	protected BaseRequest request;
 	protected Map<String, Object> map;
@@ -62,8 +64,8 @@ public class BaseTask extends AsyncTask<String, Void, Void> {
 		// logic fields
 		int sex = request.getSex();
 		int age = request.getAge();
-		int articleId = request.getArticleId();
-		int classId = request.getDocCategoryId();
+		String articleId = request.getArticleId();
+		String classId = request.getDocCategoryId();
 		String endTime = request.getEndTime();
 
 		map = new LinkedHashMap<String, Object>();
@@ -73,10 +75,10 @@ public class BaseTask extends AsyncTask<String, Void, Void> {
 		map.put("osVersion", osVersion);
 		map.put("deviceName", deviceName);
 		map.put("deviceBrand", deviceBrand);
+		map.put("appVersion", appVersion);
 		map.put("province", province);
 		map.put("city", city);
 		map.put("area", area);
-		map.put("appVersion", appVersion);
 		map.put("qudao", qudao);
 		map.put("deviceID", deviceID);
 		map.put("phoneNumber", phoneNumber);
@@ -88,7 +90,7 @@ public class BaseTask extends AsyncTask<String, Void, Void> {
 		map.put("articleId", articleId);
 		map.put("classId", classId);
 		map.put("endTime", endTime);
-		map.put("verify", key);
+		map.put("verify", MD5_SALT);
 
 		skip = new ArrayList<String>();
 		skip.add("deviceName");
@@ -112,8 +114,23 @@ public class BaseTask extends AsyncTask<String, Void, Void> {
 		}
 		String verify = MD5.encode(verifyString);
 		map.put("verify", verify);
+		// URLEncode Chinese character in HTTP-Header
+		try {
+			for (String key : map.keySet()) {
+				String tmp = String.valueOf(map.get(key));
+				if (isHanzi(tmp)) {
+					map.put(key, URLEncoder.encode(tmp, "UTF-8"));
+				}
+			}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		httpHelper = new HttpHelper(map);
 		LogUtil.logD(LogUtil.TAG, "------ BaseRequest -------" + map.toString());
+	}
+
+	public boolean isHanzi(String s) {
+		return s.getBytes().length != s.length();
 	}
 
 	@Override

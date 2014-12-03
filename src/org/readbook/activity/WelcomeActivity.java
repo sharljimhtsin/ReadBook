@@ -2,8 +2,6 @@ package org.readbook.activity;
 
 import org.readbook.R;
 import org.readbook.clz.MyApplication;
-import org.readbook.entity.BaseRequest;
-import org.readbook.task.BaseTask;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -55,10 +53,8 @@ public class WelcomeActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.start_layout);
 		MyApplication.getInstance().mLocationClient.start();
-		BaseRequest request = new BaseRequest();
-		BaseTask indexTask = new BaseTask(request, handler);
-		indexTask.execute();
 		startMills = System.currentTimeMillis();
+		handler.sendEmptyMessageDelayed(1, 2000);
 	}
 
 	@Override

@@ -19,8 +19,8 @@ public class BaseRequest {
 	private int sex = 1; // 性别|0:女|1:男
 	private int age = 0; // 用户年龄段
 	// article parameters
-	private int classId = 0; // 段子类型
-	private int articleId = 0; // 段子id
+	private String classId = ""; // 段子类型
+	private String articleId = ""; // 段子id
 	private String endTime = "";
 
 	/**
@@ -176,7 +176,7 @@ public class BaseRequest {
 	/**
 	 * @return the docCategoryId
 	 */
-	public int getDocCategoryId() {
+	public String getDocCategoryId() {
 		return classId;
 	}
 
@@ -184,14 +184,14 @@ public class BaseRequest {
 	 * @param docCategoryId
 	 *            the docCategoryId to set
 	 */
-	public void setDocCategoryId(int docCategoryId) {
+	public void setDocCategoryId(String docCategoryId) {
 		this.classId = docCategoryId;
 	}
 
 	/**
 	 * @return the articleId
 	 */
-	public int getArticleId() {
+	public String getArticleId() {
 		return articleId;
 	}
 
@@ -199,7 +199,7 @@ public class BaseRequest {
 	 * @param articleId
 	 *            the articleId to set
 	 */
-	public void setArticleId(int articleId) {
+	public void setArticleId(String articleId) {
 		this.articleId = articleId;
 	}
 
