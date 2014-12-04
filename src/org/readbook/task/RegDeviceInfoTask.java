@@ -1,26 +1,21 @@
 package org.readbook.task;
 
-import java.util.List;
-
 import org.json.JSONObject;
 import org.readbook.entity.BaseRequest;
-import org.readbook.entity.DocCategory;
 import org.readbook.res.Constants;
 import org.readbook.utils.LogUtil;
 
 import android.os.Handler;
 import android.os.Message;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import android.text.TextUtils;
 
 /**
  * @author Administrator
  *
  */
-public class ArticleCategoryListTask extends BaseTask {
+public class RegDeviceInfoTask extends BaseTask {
 
-	public ArticleCategoryListTask(BaseRequest request, Handler handler) {
+	public RegDeviceInfoTask(BaseRequest request, Handler handler) {
 		super(request, handler);
 	}
 
@@ -28,22 +23,17 @@ public class ArticleCategoryListTask extends BaseTask {
 	protected Void doInBackground(String... params) {
 		try {
 			setRequestParams();
-			String resultJson = httpHelper.httpGet(Constants.Host.index,
-					super.map);
-			LogUtil.logD(LogUtil.TAG,
-					"------ArticleCategoryListTask receiver-------"
-							+ resultJson);
+			String resultJson = httpHelper.httpGet(Constants.Host.regDevice);
+			LogUtil.logD(LogUtil.TAG, "------RegDeviceInfoTask receiver-------"
+					+ resultJson);
 			JSONObject dataObject = new JSONObject(resultJson);
 			if (dataObject.getInt("status") == 1) {
-				String data = dataObject.getString("data");
-				Gson gson = new Gson();
-				List<DocCategory> list = gson.fromJson(data,
-						new TypeToken<List<DocCategory>>() {
-						}.getType());
-				if (list.size() > 0) {
+				String deviceId = dataObject.getJSONObject("data").getString(
+						"deviceId");
+				if (!TextUtils.isEmpty(deviceId)) {
 					Message msg = new Message();
-					msg.what = 0;
-					msg.obj = list;
+					msg.what = 3;
+					msg.obj = deviceId;
 					handler.sendMessage(msg);
 				} else {
 					Message msg = handler.obtainMessage();
@@ -51,7 +41,6 @@ public class ArticleCategoryListTask extends BaseTask {
 					msg.what = -1;
 					handler.sendMessage(msg);
 				}
-
 			} else {
 				Message msg = handler.obtainMessage();
 				msg.obj = "set null";

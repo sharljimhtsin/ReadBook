@@ -55,7 +55,12 @@ public class ArticleListTask extends BaseTask {
 					msg.what = -1;
 					handler.sendMessage(msg);
 				}
-
+			} else if (dataObject.getInt("status") == 2) {
+				String info = dataObject.getString("info");
+				Message msg = handler.obtainMessage();
+				msg.obj = info;
+				msg.what = 5;
+				handler.sendMessage(msg);
 			} else {
 				Message msg = handler.obtainMessage();
 				msg.obj = "set null";

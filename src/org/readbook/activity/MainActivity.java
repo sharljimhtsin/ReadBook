@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.readbook.R;
+import org.readbook.clz.MyApplication;
 import org.readbook.clz.adapter.ArticleListAdapter;
 import org.readbook.clz.adapter.MyPagerAdapter;
 import org.readbook.entity.Article;
@@ -108,6 +109,7 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 	private void prepareHandler() {
 		mHandler = new Handler(new Callback() {
 
+			@SuppressWarnings("unchecked")
 			@Override
 			public boolean handleMessage(Message msg) {
 				switch (msg.what) {
@@ -139,6 +141,10 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 				case 4:
 					List<Article> list5 = (List<Article>) msg.obj;
 					doRefresh(list5);
+					break;
+				case 5:
+					String info = String.valueOf(msg.obj);
+					doNoMoreData(info);
 					break;
 				default:
 					break;
@@ -278,10 +284,12 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 	}
 
 	private void doRefresh(List<Article> list) {
-		ArticleListAdapter adapter = (ArticleListAdapter) mCurrentListView
+		HeaderViewListAdapter adapter = (HeaderViewListAdapter) mCurrentListView
 				.getAdapter();
-		adapter.resetItems(list);
-		adapter.notifyDataSetChanged();
+		ArticleListAdapter adapterInner = (ArticleListAdapter) adapter
+				.getWrappedAdapter();
+		adapterInner.resetItems(list);
+		adapterInner.notifyDataSetChanged();
 		mCurrentListView.onRefreshComplete();
 	}
 
@@ -292,10 +300,17 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 	}
 
 	private void doLoadMore(List<Article> list) {
-		ArticleListAdapter adapter = (ArticleListAdapter) mCurrentListView
+		HeaderViewListAdapter adapter = (HeaderViewListAdapter) mCurrentListView
 				.getAdapter();
-		adapter.appendItems(list);
-		adapter.notifyDataSetChanged();
+		ArticleListAdapter adapterInner = (ArticleListAdapter) adapter
+				.getWrappedAdapter();
+		adapterInner.appendItems(list);
+		adapterInner.notifyDataSetChanged();
 		mCurrentListView.onLoadMoreComplete();
+	}
+
+	private void doNoMoreData(String info) {
+		mCurrentListView.onLoadMoreComplete();
+		MyApplication.getInstance().showToast(this, info);
 	}
 }

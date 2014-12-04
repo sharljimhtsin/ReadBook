@@ -2,12 +2,15 @@ package org.readbook.activity;
 
 import org.readbook.R;
 import org.readbook.clz.MyApplication;
+import org.readbook.entity.BaseRequest;
+import org.readbook.task.RegDeviceInfoTask;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import cn.jpush.android.api.JPushInterface;
 
 public class WelcomeActivity extends BaseActivity {
@@ -44,6 +47,11 @@ public class WelcomeActivity extends BaseActivity {
 			case 2:
 				finish();
 				break;
+			case 3:
+				String deviceId = String.valueOf(msg.obj);
+				MyApplication.getInstance().setDeviceID(deviceId);
+				handler.sendEmptyMessage(1);
+				break;
 			}
 		};
 	};
@@ -53,8 +61,18 @@ public class WelcomeActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.start_layout);
 		MyApplication.getInstance().mLocationClient.start();
+		if (TextUtils.isEmpty(MyApplication.getInstance().getDeviceID())) {
+			registerDevice();
+		} else {
+			handler.sendEmptyMessageDelayed(1, 2000);
+		}
 		startMills = System.currentTimeMillis();
-		handler.sendEmptyMessageDelayed(1, 2000);
+	}
+
+	private void registerDevice() {
+		BaseRequest request = new BaseRequest();
+		RegDeviceInfoTask task = new RegDeviceInfoTask(request, handler);
+		task.execute();
 	}
 
 	@Override
