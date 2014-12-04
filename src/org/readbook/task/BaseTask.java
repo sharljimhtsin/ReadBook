@@ -97,7 +97,6 @@ public class BaseTask extends AsyncTask<String, Void, Void> {
 		skip.add("deviceBrand");
 		skip.add("qudao");
 		skip.add("area");
-		skip.add("deviceID");
 		skip.add("phoneNumber");
 		skip.add("qq");
 		skip.add("name");

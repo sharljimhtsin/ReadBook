@@ -337,4 +337,24 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 	private void showTip(String info) {
 		MyApplication.getInstance().showToast(this, info);
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#finish()
+	 */
+	@Override
+	public void finish() {
+		System.exit(0);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onBackPressed()
+	 */
+	@Override
+	public void onBackPressed() {
+		System.exit(0);
+	}
 }

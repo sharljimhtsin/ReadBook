@@ -51,8 +51,9 @@ public class ArticleTypeListTask extends BaseTask {
 					handler.sendMessage(msg);
 				}
 			} else {
+				String info = dataObject.getString("info");
 				Message msg = handler.obtainMessage();
-				msg.obj = "set null";
+				msg.obj = info;
 				msg.what = MainActivity.Logic_Error;
 				handler.sendMessage(msg);
 			}
