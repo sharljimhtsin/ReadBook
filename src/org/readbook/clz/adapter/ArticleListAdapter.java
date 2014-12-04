@@ -14,7 +14,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * @author Administrator
@@ -90,23 +93,37 @@ public class ArticleListAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder viewHolder;
 		if (convertView == null) {
-			convertView = mInflater.inflate(R.layout.item_article_type_list,
-					null);
+			convertView = mInflater.inflate(R.layout.item_article_list, null);
 			viewHolder = new ViewHolder();
 			viewHolder.name = (TextView) convertView
-					.findViewById(R.id.textView_article_type_list_title);
+					.findViewById(R.id.textView_article_list_title);
+			viewHolder.content = (TextView) convertView
+					.findViewById(R.id.textView_article_list_content);
+			viewHolder.icon = (ImageView) convertView
+					.findViewById(R.id.imageView_article_list_icon);
 			convertView.setTag(Constants.TAG_VIEW, viewHolder);
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag(Constants.TAG_VIEW);
 		}
 		Article article = mList.get(position);
+		// set url to tag for further doing
+		convertView.setTag(Constants.TAG_DATA, article.getUrl());
+		// bind data to UI
 		viewHolder.name.setText(article.getTitle());
-		viewHolder.name.setTag(Constants.TAG_DATA, article.getUrl());
+		if (article.getParentType() == 1) {
+			viewHolder.content.setText(article.getContent());
+		}
+		if (article.getImageCounts() > 0) {
+			String[] urls = article.getImageUrls().split(",");
+			ImageLoader.getInstance().displayImage(urls[0], viewHolder.icon);
+		}
 		return convertView;
 	}
 
 	private class ViewHolder {
 		TextView name;
+		TextView content;
+		ImageView icon;
 	}
 
 }
