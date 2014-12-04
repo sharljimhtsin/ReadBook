@@ -3,6 +3,7 @@ package org.readbook.task;
 import java.util.List;
 
 import org.json.JSONObject;
+import org.readbook.activity.MainActivity;
 import org.readbook.entity.BaseRequest;
 import org.readbook.entity.DocType;
 import org.readbook.res.Constants;
@@ -40,26 +41,26 @@ public class ArticleTypeListTask extends BaseTask {
 						}.getType());
 				if (list.size() > 0) {
 					Message msg = new Message();
-					msg.what = 0;
+					msg.what = MainActivity.Initial_Menu;
 					msg.obj = list;
 					handler.sendMessage(msg);
 				} else {
 					Message msg = handler.obtainMessage();
 					msg.obj = "empty set";
-					msg.what = -1;
+					msg.what = MainActivity.No_Data;
 					handler.sendMessage(msg);
 				}
 			} else {
 				Message msg = handler.obtainMessage();
 				msg.obj = "set null";
-				msg.what = -1;
+				msg.what = MainActivity.Logic_Error;
 				handler.sendMessage(msg);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			Message msg = handler.obtainMessage();
 			msg.obj = Constants.net_error;
-			msg.what = -1;
+			msg.what = MainActivity.Net_Error;
 			handler.sendMessage(msg);
 		}
 		return null;

@@ -106,6 +106,16 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 		}
 	}
 
+	public static final int Logic_Error = -3;
+	public static final int Net_Error = -2;
+	public static final int No_Data = -1;
+	public static final int Initial_Menu = 0;
+	public static final int Initial_List = 1;
+	public static final int Refresh_List = 2;
+	public static final int Do_LoadMore = 3;
+	public static final int Do_Refresh = 4;
+	public static final int Do_NoMoreData = 5;
+
 	private void prepareHandler() {
 		mHandler = new Handler(new Callback() {
 
@@ -113,10 +123,19 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 			@Override
 			public boolean handleMessage(Message msg) {
 				switch (msg.what) {
-				case -1:
-
+				case Logic_Error:
+					String info1 = String.valueOf(msg.obj);
+					showTip(info1);
 					break;
-				case 0:
+				case Net_Error:
+					String info2 = String.valueOf(msg.obj);
+					showTip(info2);
+					break;
+				case No_Data:
+					String info3 = String.valueOf(msg.obj);
+					showTip(info3);
+					break;
+				case Initial_Menu:
 					List<DocType> list = (List<DocType>) msg.obj;
 					bindMenu(list);
 					// build subMenu/viewPager with default first one
@@ -124,25 +143,25 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 					bindSubmenu();
 					buildViewPager();
 					break;
-				case 1:
+				case Initial_List:
 					List<Article> list2 = (List<Article>) msg.obj;
 					bindList(list2);
 					break;
-				case 2:
+				case Refresh_List:
 					List<DocCategory> list3 = (List<DocCategory>) msg.obj;
 					refreshCategoryHolder(list3);
 					bindSubmenu();
 					buildViewPager();
 					break;
-				case 3:
+				case Do_LoadMore:
 					List<Article> list4 = (List<Article>) msg.obj;
 					doLoadMore(list4);
 					break;
-				case 4:
+				case Do_Refresh:
 					List<Article> list5 = (List<Article>) msg.obj;
 					doRefresh(list5);
 					break;
-				case 5:
+				case Do_NoMoreData:
 					String info = String.valueOf(msg.obj);
 					doNoMoreData(info);
 					break;
@@ -185,7 +204,8 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 
 				@Override
 				public void onClick(View v) {
-					Message message = mHandler.obtainMessage(2, v.getTag());
+					Message message = mHandler.obtainMessage(Refresh_List,
+							v.getTag());
 					mHandler.sendMessage(message);
 				}
 			});
@@ -311,6 +331,10 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 
 	private void doNoMoreData(String info) {
 		mCurrentListView.onLoadMoreComplete();
+		showTip(info);
+	}
+
+	private void showTip(String info) {
 		MyApplication.getInstance().showToast(this, info);
 	}
 }

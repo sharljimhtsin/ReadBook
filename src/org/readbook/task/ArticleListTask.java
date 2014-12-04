@@ -3,6 +3,7 @@ package org.readbook.task;
 import java.util.List;
 
 import org.json.JSONObject;
+import org.readbook.activity.MainActivity;
 import org.readbook.entity.Article;
 import org.readbook.entity.BaseRequest;
 import org.readbook.res.Constants;
@@ -41,37 +42,37 @@ public class ArticleListTask extends BaseTask {
 				if (list.size() > 0) {
 					Message msg = new Message();
 					if ("0".equals(params[0])) {
-						msg.what = 1;
+						msg.what = MainActivity.Initial_List;
 					} else if ("1".equals(params[0])) {
-						msg.what = 3;
+						msg.what = MainActivity.Do_LoadMore;
 					} else {
-						msg.what = 4;
+						msg.what = MainActivity.Do_Refresh;
 					}
 					msg.obj = list;
 					handler.sendMessage(msg);
 				} else {
 					Message msg = handler.obtainMessage();
 					msg.obj = "empty set";
-					msg.what = -1;
+					msg.what = MainActivity.No_Data;
 					handler.sendMessage(msg);
 				}
 			} else if (dataObject.getInt("status") == 2) {
 				String info = dataObject.getString("info");
 				Message msg = handler.obtainMessage();
 				msg.obj = info;
-				msg.what = 5;
+				msg.what = MainActivity.Do_NoMoreData;
 				handler.sendMessage(msg);
 			} else {
 				Message msg = handler.obtainMessage();
 				msg.obj = "set null";
-				msg.what = -1;
+				msg.what = MainActivity.Logic_Error;
 				handler.sendMessage(msg);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			Message msg = handler.obtainMessage();
 			msg.obj = Constants.net_error;
-			msg.what = -1;
+			msg.what = MainActivity.Net_Error;
 			handler.sendMessage(msg);
 		}
 		return null;
