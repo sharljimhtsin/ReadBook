@@ -5,7 +5,6 @@ package org.readbook.entity;
  *
  */
 public class BaseRequest {
-	private String deviceID = "";
 	// common parameters
 	private int page = 1;
 	private int pageSize = 20;
@@ -22,21 +21,6 @@ public class BaseRequest {
 	private String classId = ""; // 段子类型
 	private String articleId = ""; // 段子id
 	private String endTime = "";
-
-	/**
-	 * @return the deviceID
-	 */
-	public String getDeviceID() {
-		return deviceID;
-	}
-
-	/**
-	 * @param deviceID
-	 *            the deviceID to set
-	 */
-	public void setDeviceID(String deviceID) {
-		this.deviceID = deviceID;
-	}
 
 	/**
 	 * @return the page

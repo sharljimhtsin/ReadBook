@@ -19,9 +19,7 @@ public class Constants {
 		// Index
 		public final static String index = host + "/Home/Index/index";
 		// Task
-		public final static String getAvailable = host
-				+ "/Home/Task/getAvailable";
-		public final static String test = host + "/Home/Device/android";
+		public final static String regDevice = host + "/Home/Device/android";
 
 		public final static String typeList = host + "/Home/Article/classInfo";
 
@@ -32,6 +30,7 @@ public class Constants {
 	public static final class ShareRefrence {
 		public final static String SHAREREFRENCE_NAME = "readbook";
 		public final static String jid = "jid";
+		public final static String deviceID = "deviceID";
 		//
 		public final static String shareText = "shareText";
 		public final static String shareUrl = "shareUrl";

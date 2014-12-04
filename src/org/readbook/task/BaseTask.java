@@ -55,8 +55,8 @@ public class BaseTask extends AsyncTask<String, Void, Void> {
 		String area = application.getLocationArea();
 		String appVersion = application.getVersion();
 		String qudao = application.getQudao();
+		String deviceID = application.getDeviceID();
 		// extend fields
-		String deviceID = request.getDeviceID();
 		String phoneNumber = request.getPhoneNumber();
 		String qq = request.getQq();
 		String name = request.getName();

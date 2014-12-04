@@ -45,6 +45,7 @@ public class MyApplication extends Application {
 	private String locationCity = "";
 	private String locationArea = "";
 	private String jPushId = "";
+	private String deviceID = "";
 
 	@Override
 	public void onCreate() {
@@ -327,6 +328,28 @@ public class MyApplication extends Application {
 		this.jPushId = jPushId;
 		Editor editor = sharedPreferences.edit();
 		editor.putString(Constants.ShareRefrence.jid, this.jPushId);
+		editor.commit();
+	}
+
+	/**
+	 * @return the deviceID
+	 */
+	public String getDeviceID() {
+		if (TextUtils.isEmpty(deviceID)) {
+			return sharedPreferences.getString(
+					Constants.ShareRefrence.deviceID, "");
+		}
+		return deviceID;
+	}
+
+	/**
+	 * @param deviceID
+	 *            the deviceID to set
+	 */
+	public void setDeviceID(String deviceID) {
+		this.deviceID = deviceID;
+		Editor editor = sharedPreferences.edit();
+		editor.putString(Constants.ShareRefrence.deviceID, this.deviceID);
 		editor.commit();
 	}
 
