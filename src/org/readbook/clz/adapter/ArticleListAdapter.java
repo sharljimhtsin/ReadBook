@@ -93,14 +93,8 @@ public class ArticleListAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		Article article = mList.get(position);
 		ViewHolder_No_Pic viewHolder;
-		if (convertView == null) {
-			viewHolder = getViewHolderByArticle(article);
-			convertView = viewHolder.view;
-			convertView.setTag(Constants.TAG_VIEW, viewHolder);
-		} else {
-			viewHolder = (ViewHolder_No_Pic) convertView
-					.getTag(Constants.TAG_VIEW);
-		}
+		viewHolder = getViewHolderByArticle(article);
+		convertView = viewHolder.view;
 		// set url to tag for further doing
 		convertView.setTag(Constants.TAG_DATA, article.getUrl());
 		// bind data to UI
