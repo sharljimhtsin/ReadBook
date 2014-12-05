@@ -156,8 +156,7 @@ public class ArticleListAdapter extends BaseAdapter {
 		 * 
 		 */
 		public ViewHolder() {
-			view = mInflater
-					.inflate(R.layout.item_article_list_multi_pic, null);
+			view = mInflater.inflate(R.layout.item_article_list, null);
 			name = (TextView) view
 					.findViewById(R.id.textView_article_list_title);
 			icon = (ImageView) view
@@ -173,7 +172,6 @@ public class ArticleListAdapter extends BaseAdapter {
 		 */
 		@Override
 		public void bindData(Article article) {
-			super.bindData(article);
 			name.setText(article.getTitle());
 			String[] urls = article.getImageUrls().split(",");
 			ImageLoader.getInstance().displayImage(urls[0], icon);
@@ -188,15 +186,16 @@ public class ArticleListAdapter extends BaseAdapter {
 		 * 
 		 */
 		public ViewHolder_Multi_Pic() {
-			view = mInflater.inflate(R.layout.item_article_list, null);
+			view = mInflater
+					.inflate(R.layout.item_article_list_multi_pic, null);
 			name = (TextView) view
 					.findViewById(R.id.textView_article_list_title);
 			icon = (ImageView) view
 					.findViewById(R.id.imageView_article_list_icon);
 			icon2 = (ImageView) view
-					.findViewById(R.id.imageView_article_list_icon);
+					.findViewById(R.id.imageView_article_list_icon2);
 			icon3 = (ImageView) view
-					.findViewById(R.id.imageView_article_list_icon);
+					.findViewById(R.id.imageView_article_list_icon3);
 		}
 
 		/*
@@ -208,8 +207,9 @@ public class ArticleListAdapter extends BaseAdapter {
 		 */
 		@Override
 		public void bindData(Article article) {
-			super.bindData(article);
+			name.setText(article.getTitle());
 			String[] urls = article.getImageUrls().split(",");
+			ImageLoader.getInstance().displayImage(urls[0], icon);
 			ImageLoader.getInstance().displayImage(urls[1], icon2);
 			ImageLoader.getInstance().displayImage(urls[2], icon3);
 		}
