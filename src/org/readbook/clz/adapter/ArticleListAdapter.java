@@ -91,39 +91,128 @@ public class ArticleListAdapter extends BaseAdapter {
 	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		ViewHolder viewHolder;
+		Article article = mList.get(position);
+		ViewHolder_No_Pic viewHolder;
 		if (convertView == null) {
-			convertView = mInflater.inflate(R.layout.item_article_list, null);
-			viewHolder = new ViewHolder();
-			viewHolder.name = (TextView) convertView
-					.findViewById(R.id.textView_article_list_title);
-			viewHolder.content = (TextView) convertView
-					.findViewById(R.id.textView_article_list_content);
-			viewHolder.icon = (ImageView) convertView
-					.findViewById(R.id.imageView_article_list_icon);
+			viewHolder = getViewHolderByArticle(article);
+			convertView = viewHolder.view;
 			convertView.setTag(Constants.TAG_VIEW, viewHolder);
 		} else {
-			viewHolder = (ViewHolder) convertView.getTag(Constants.TAG_VIEW);
+			viewHolder = (ViewHolder_No_Pic) convertView
+					.getTag(Constants.TAG_VIEW);
 		}
-		Article article = mList.get(position);
 		// set url to tag for further doing
 		convertView.setTag(Constants.TAG_DATA, article.getUrl());
 		// bind data to UI
-		viewHolder.name.setText(article.getTitle());
-		if (article.getParentType() == 1) {
-			viewHolder.content.setText(article.getContent());
-		}
-		if (article.getImageCounts() > 0) {
-			String[] urls = article.getImageUrls().split(",");
-			ImageLoader.getInstance().displayImage(urls[0], viewHolder.icon);
+		if (viewHolder instanceof ViewHolder_No_Pic) {
+			viewHolder.bindData(article);
+		} else if (viewHolder instanceof ViewHolder) {
+			((ViewHolder) viewHolder).bindData(article);
+		} else {
+			((ViewHolder_Multi_Pic) viewHolder).bindData(article);
 		}
 		return convertView;
 	}
 
-	private class ViewHolder {
-		TextView name;
+	private ViewHolder_No_Pic getViewHolderByArticle(Article article) {
+		if (article.getParentType() == 1) {
+			// No picture
+			return new ViewHolder_No_Pic();
+		} else {
+			if (article.getImageCounts() > 1) {
+				// multi-picture
+				return new ViewHolder_Multi_Pic();
+			} else {
+				// single picture
+				return new ViewHolder();
+			}
+		}
+	}
+
+	private class ViewHolder_No_Pic {
+		View view;
 		TextView content;
+
+		/**
+		 * 
+		 */
+		public ViewHolder_No_Pic() {
+			view = mInflater.inflate(R.layout.item_article_list_no_pic, null);
+			content = (TextView) view
+					.findViewById(R.id.textView_article_list_content);
+		}
+
+		public void bindData(Article article) {
+			content.setText(article.getContent());
+		}
+
+	}
+
+	private class ViewHolder extends ViewHolder_No_Pic {
+		TextView name;
 		ImageView icon;
+
+		/**
+		 * 
+		 */
+		public ViewHolder() {
+			view = mInflater
+					.inflate(R.layout.item_article_list_multi_pic, null);
+			name = (TextView) view
+					.findViewById(R.id.textView_article_list_title);
+			icon = (ImageView) view
+					.findViewById(R.id.imageView_article_list_icon);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * org.readbook.clz.adapter.ArticleListAdapter.ViewHolder_No_Pic#bindData
+		 * (org.readbook.entity.Article)
+		 */
+		@Override
+		public void bindData(Article article) {
+			super.bindData(article);
+			name.setText(article.getTitle());
+			String[] urls = article.getImageUrls().split(",");
+			ImageLoader.getInstance().displayImage(urls[0], icon);
+		}
+	}
+
+	private class ViewHolder_Multi_Pic extends ViewHolder {
+		ImageView icon2;
+		ImageView icon3;
+
+		/**
+		 * 
+		 */
+		public ViewHolder_Multi_Pic() {
+			view = mInflater.inflate(R.layout.item_article_list, null);
+			name = (TextView) view
+					.findViewById(R.id.textView_article_list_title);
+			icon = (ImageView) view
+					.findViewById(R.id.imageView_article_list_icon);
+			icon2 = (ImageView) view
+					.findViewById(R.id.imageView_article_list_icon);
+			icon3 = (ImageView) view
+					.findViewById(R.id.imageView_article_list_icon);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * org.readbook.clz.adapter.ArticleListAdapter.ViewHolder#bindData(org
+		 * .readbook.entity.Article)
+		 */
+		@Override
+		public void bindData(Article article) {
+			super.bindData(article);
+			String[] urls = article.getImageUrls().split(",");
+			ImageLoader.getInstance().displayImage(urls[1], icon2);
+			ImageLoader.getInstance().displayImage(urls[2], icon3);
+		}
 	}
 
 }
