@@ -2,27 +2,26 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-    <TextView
-        android:id="@+id/textView_article_list_title"
-        android:layout_width="300dip"
-        android:layout_height="100dip"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/textView_article_list_content"
-        android:layout_width="300dip"
-        android:layout_height="100dip"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView_article_list_title"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
     <ImageView
         android:id="@+id/imageView_article_list_icon"
         android:layout_width="100dip"
         android:layout_height="100dip"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/textView_article_list_title" />
+        android:paddingBottom="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/textView_article_list_title"
+        android:layout_width="300dip"
+        android:layout_height="100dip"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/imageView_article_list_icon"
+        android:gravity="center_vertical"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
 
 </RelativeLayout>

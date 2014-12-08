@@ -24,6 +24,7 @@ import android.os.Handler.Callback;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -199,6 +200,7 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 			textView.setHeight(150);
 			textView.setWidth(150);
 			textView.setBackgroundColor(Color.RED);
+			textView.setGravity(Gravity.CENTER_VERTICAL);
 			textView.setTag(docType.getChildrenList());
 			textView.setOnClickListener(new OnClickListener() {
 
@@ -229,6 +231,7 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 			textView.setHeight(150);
 			textView.setWidth(150);
 			textView.setBackgroundColor(Color.RED);
+			textView.setGravity(Gravity.CENTER_VERTICAL);
 			textView.setTag(i);
 			textView.setOnClickListener(new OnClickListener() {
 
