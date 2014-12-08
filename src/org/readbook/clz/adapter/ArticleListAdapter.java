@@ -93,8 +93,10 @@ public class ArticleListAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		Article article = mList.get(position);
 		ViewHolder_No_Pic viewHolder;
-		viewHolder = getViewHolderByArticle(article);
+		viewHolder = getViewHolderByArticleOrView(article, convertView);
 		convertView = viewHolder.view;
+		// set viewHolder in convertView to recycle for good performance
+		convertView.setTag(Constants.TAG_VIEW, viewHolder);
 		// set url to tag for further doing
 		convertView.setTag(Constants.TAG_DATA, article.getUrl());
 		// bind data to UI
@@ -108,17 +110,29 @@ public class ArticleListAdapter extends BaseAdapter {
 		return convertView;
 	}
 
-	private ViewHolder_No_Pic getViewHolderByArticle(Article article) {
+	private boolean isSameType(Class<?> clazz, View view) {
+		if (view == null) {
+			return false;
+		}
+		return view.getTag(Constants.TAG_VIEW).getClass().equals(clazz);
+	}
+
+	private ViewHolder_No_Pic getViewHolderByArticleOrView(Article article,
+			View view) {
 		if (article.getParentType() == 1) {
 			// No picture
-			return new ViewHolder_No_Pic();
+			return isSameType(ViewHolder_No_Pic.class, view) ? (ViewHolder_No_Pic) view
+					.getTag(Constants.TAG_VIEW) : new ViewHolder_No_Pic();
 		} else {
 			if (article.getImageCounts() > 1) {
 				// multi-picture
-				return new ViewHolder_Multi_Pic();
+				return isSameType(ViewHolder_Multi_Pic.class, view) ? (ViewHolder_Multi_Pic) view
+						.getTag(Constants.TAG_VIEW)
+						: new ViewHolder_Multi_Pic();
 			} else {
 				// single picture
-				return new ViewHolder();
+				return isSameType(ViewHolder.class, view) ? (ViewHolder) view
+						.getTag(Constants.TAG_VIEW) : new ViewHolder();
 			}
 		}
 	}

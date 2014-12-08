@@ -25,6 +25,12 @@ public class Constants {
 
 		public final static String articleList = host
 				+ "/Home/Article/showlist";
+
+		public final static String checkArticle = host
+				+ "/Home/Article/checkArticle";
+
+		public final static String showArticle = host
+				+ "/Home/Article/showdetail";
 	}
 
 	public static final class ShareRefrence {
