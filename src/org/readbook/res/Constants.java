@@ -15,7 +15,7 @@ public class Constants {
 	public static int TAG_DATA = R.string.tag_data;
 
 	public static final class Host {
-		public final static String host = "http://192.168.0.172:8083";
+		public final static String host = "http://192.168.0.115:8085";
 		// Index
 		public final static String index = host + "/Home/Index/index";
 		// Task
@@ -29,6 +29,8 @@ public class Constants {
 				+ "/Article/checkArticle";
 
 		public final static String showArticle = host + "/Article/showdetail";
+
+		public final static String test = host + "/device/ios";
 	}
 
 	public static final class ShareRefrence {
